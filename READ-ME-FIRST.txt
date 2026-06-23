@@ -1,0 +1,47 @@
+COST CALCULATORS — GO LIVE at cost-calculators.github.io
+========================================================
+Target address:  https://cost-calculators.github.io/
+(All links in these files are set for this exact root address.)
+
+WHY AN ORGANIZATION: GitHub only serves "cost-calculators.github.io" if the
+OWNER is named "cost-calculators". So you create a free organization with that
+name, then a repo named exactly  cost-calculators.github.io  inside it.
+
+STEP 1 — Add your lead-form key (the ONLY edit)
+  a. web3forms.com -> enter your email -> "Create Access Key" (key arrives by email).
+  b. Open  assets/calc-app.js  in Notepad (Windows) or TextEdit (Mac).
+  c. Near the top, in the boxed comment, find:
+        var WEB3FORMS_KEY = "YOUR-WEB3FORMS-ACCESS-KEY";
+     Replace YOUR-WEB3FORMS-ACCESS-KEY with your key (keep the quotes). Save.
+
+STEP 2 — Create a free organization named "cost-calculators"
+  a. github.com -> top-right "+" -> "New organization".
+  b. Pick the FREE plan.
+  c. Organization name:  cost-calculators   (if taken, see note at bottom)
+  d. Finish setup (skip inviting people).
+
+STEP 3 — Create the site repo
+  a. Inside the new org, click "New repository".
+  b. Repository name (EXACTLY):  cost-calculators.github.io
+  c. Set Public. Create repository.
+
+STEP 4 — Upload these files
+  a. In the repo: "Add file" -> "Upload files".
+  b. Drag in EVERYTHING from this folder: the .html files, the assets folder,
+     robots.txt, sitemap.xml, .nojekyll  (the files themselves, not a wrapper folder).
+  c. Commit changes.
+
+STEP 5 — Turn on GitHub Pages
+  a. Repo Settings -> Pages.
+  b. Source: "Deploy from a branch". Branch: main. Folder: / (root). Save.
+  c. Wait 1-2 minutes (first build can take a few).
+
+STEP 6 — Test
+  Open  https://cost-calculators.github.io/
+  Styled hub should load. Click each calculator; submit the form once to confirm
+  the email arrives (check spam the first time).
+
+NOTE — if "cost-calculators" org name is already taken:
+  Pick another name, e.g. costcalculators or cartcoders-tools. Your address then
+  becomes  https://THATNAME.github.io/  and I'll regenerate the files for it.
+  Tip: avoid the word "Shopify" in the name (Shopify Partner trademark rule).
