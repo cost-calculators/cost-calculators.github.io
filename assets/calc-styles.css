@@ -19,17 +19,19 @@ p{margin:0 0 1em}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
 
 /* top bar */
-.topbar{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40;background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(10px)}
-.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
-.brand{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
-.brand .dot{width:11px;height:11px;background:var(--black);border-radius:2px;display:inline-block}
+.topbar{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40;background:rgba(255,255,255,.9);backdrop-filter:saturate(180%) blur(10px)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:70px}
+.brand{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.025em;display:flex;align-items:center;gap:10px;color:var(--ink)}
+.brand .dot{width:12px;height:12px;background:var(--black);border-radius:3px;display:inline-block}
 .brand small{font-weight:400;color:var(--ink-2);font-size:12px;letter-spacing:.02em}
-.topbar nav{display:flex;gap:26px;align-items:center}
-.topbar nav a{font-size:14px;color:var(--ink-2)}
+.topbar nav{display:flex;gap:32px;align-items:center}
+.topbar nav a{font-family:var(--display);font-size:15.5px;font-weight:500;color:var(--ink);position:relative;padding:6px 0;transition:color .15s}
+.topbar nav a:not(.talk)::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--ink);transition:width .22s ease}
+.topbar nav a:not(.talk):hover::after{width:100%}
 .topbar nav a:hover{color:var(--ink)}
-.topbar .talk{font-size:14px;color:#fff;background:var(--black);padding:9px 16px;border-radius:8px}
-.topbar .talk:hover{color:#fff;background:#000}
-@media(max-width:760px){.topbar nav a:not(.talk){display:none}}
+.topbar .talk{font-size:15px;font-weight:600;color:#fff;background:var(--black);padding:11px 20px;border-radius:9px}
+.topbar .talk:hover{color:#fff;background:#000;box-shadow:0 8px 20px -10px rgba(0,0,0,.55)}
+@media(max-width:820px){.topbar nav a:not(.talk){display:none}.topbar .wrap{height:62px}.brand{font-size:18px}}
 
 /* breadcrumb */
 .crumbs{font-size:13px;color:var(--ink-2);padding:18px 0 0}

@@ -170,9 +170,62 @@ var WEB3FORMS_KEY = "6609639b-4c84-4353-92e2-b75cb8167ec5";
   if($("#resetBtn"))$("#resetBtn").addEventListener("click",function(){form.reset();history.replaceState(null,"",location.pathname);syncBoxes();render();toast("Calculator reset");});
 
   function loadScript(src){return new Promise(function(res,rej){var s=document.createElement("script");s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
-  function captureTarget(){return $(".result-sticky");}
-  if($("#saveImg"))$("#saveImg").addEventListener("click",function(){toast("Preparing image…");loadScript("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js").then(function(){window.html2canvas(captureTarget(),{backgroundColor:"#f8f8f8",scale:2}).then(function(cv){var a=document.createElement("a");a.href=cv.toDataURL("image/png");a.download="estimate.png";a.click();toast("Image saved");});}).catch(function(){toast("Could not load image tool")});});
-  if($("#dlPdf"))$("#dlPdf").addEventListener("click",function(){toast("Building PDF…");loadScript("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js").then(function(){return loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");}).then(function(){window.html2canvas(captureTarget(),{backgroundColor:"#ffffff",scale:2}).then(function(cv){var jsPDF=window.jspdf.jsPDF,pdf=new jsPDF("p","pt","a4");var w=pdf.internal.pageSize.getWidth()-72,h=cv.height*(w/cv.width);pdf.setFontSize(15);pdf.text(document.title.split("|")[0].trim(),36,46);pdf.setFontSize(10);pdf.setTextColor(120);pdf.text("Generated with Shopify Cost · Indicative, not a quote",36,62);pdf.addImage(cv.toDataURL("image/png"),"PNG",36,80,w,h);pdf.save("estimate.pdf");toast("PDF downloaded");});}).catch(function(){window.print();});});
+
+  /* ---------- build premium report sheet ---------- */
+  function esc(x){return String(x==null?"":x).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function buildReport(){
+    var r=window.__lastResult||{};
+    var meta=window.REPORT_META||{calc:document.title,site:"Shopify Cost Calculators",url:location.href};
+    var promo=window.REPORT_PROMO||{kicker:"CartCoders — Certified Shopify Experts",headline:"Turn this estimate into a plan.",sub:"",bullets:[],ctaText:"Book a free consultation",ctaUrl:"https://cartcoders.com/contact-us"};
+    var fig=(r.high!=null)?((r.isMoney!==false?fmtMoney:fmtNum)(r.low)+" – "+(r.isMoney!==false?fmtMoney:fmtNum)(r.high)):((r.isMoney!==false?fmtMoney:fmtNum)(r.low||0));
+    var date=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+    function rows(arr){return (arr||[]).map(function(x){return '<tr><td style="padding:9px 12px;border-bottom:1px solid #eee;color:#555;font-size:13px">'+esc(x.k)+'</td><td style="padding:9px 12px;border-bottom:1px solid #eee;text-align:right;font-weight:600;font-size:13px;font-family:\'Space Grotesk\',sans-serif">'+esc(x.v)+'</td></tr>';}).join("");}
+    var inputRows=(r.summary||[]).filter(function(x){return ["Estimated timeline","Estimated budget range","Annual revenue uplift","Annual revenue gain","Net annual benefit","Annual revenue added","Net annual gain","Monthly retainer","Monthly cost"].indexOf(x.k)===-1;});
+    var estRows=(r.rows||[]);
+    var pkg=r.package?('<div style="margin-top:14px;border:1px solid #111;border-radius:10px;padding:14px 16px"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#777;font-family:\'Space Grotesk\',sans-serif">'+esc(r.package.label)+'</div><div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:16px;margin-top:3px">'+esc(r.package.name)+'</div><div style="font-size:12px;color:#555;margin-top:3px">'+esc(r.package.desc)+'</div></div>'):'';
+    var bullets=(promo.bullets||[]).map(function(b){return '<li style="font-size:12.5px;color:#e7e7e7;padding:5px 0 5px 22px;position:relative;list-style:none"><span style="position:absolute;left:0;top:9px;width:11px;height:7px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg)"></span>'+esc(b)+'</li>';}).join("");
+    var host=document.getElementById("reportSheet");
+    if(!host){host=document.createElement("div");host.id="reportSheet";host.style.cssText="position:fixed;left:-99999px;top:0;width:820px;background:#fff";document.body.appendChild(host);}
+    host.innerHTML=''+
+      '<div style="width:820px;background:#fff;color:#111;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif">'+
+        '<div style="background:#111;color:#fff;padding:30px 40px;display:flex;justify-content:space-between;align-items:flex-start">'+
+          '<div><div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:21px;letter-spacing:-.02em">'+esc(meta.site)+'</div>'+
+          '<div style="font-size:12px;color:#bbb;margin-top:4px">'+esc(meta.calc)+' · Estimate report</div></div>'+
+          '<div style="text-align:right;font-size:11.5px;color:#bbb;line-height:1.6">'+esc(date)+'<br>'+esc((meta.url||"").replace(/^https?:\/\//,""))+'</div>'+
+        '</div>'+
+        '<div style="padding:30px 40px">'+
+          '<div style="font-family:\'Space Grotesk\',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#777">'+esc(r.primaryLabel||"Estimate")+'</div>'+
+          '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:42px;letter-spacing:-.03em;margin:4px 0 2px">'+esc(fig)+'</div>'+
+          '<div style="font-size:12.5px;color:#777">'+esc(r.sub||"")+'</div>'+
+          '<div style="display:flex;gap:26px;margin-top:26px">'+
+            '<div style="flex:1"><div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;margin-bottom:8px">Your selections</div><table style="width:100%;border-collapse:collapse;border:1px solid #eee;border-radius:8px;overflow:hidden">'+rows(inputRows)+'</table></div>'+
+            '<div style="flex:1"><div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;margin-bottom:8px">Your estimate</div><table style="width:100%;border-collapse:collapse;border:1px solid #eee;border-radius:8px;overflow:hidden">'+rows(estRows)+'</table>'+pkg+'</div>'+
+          '</div>'+
+          '<div style="margin-top:22px;font-size:11.5px;color:#999">This is an indicative estimate based on the details you entered, not a formal quote. Final pricing follows a short discovery review.</div>'+
+        '</div>'+
+        '<div style="background:#111;color:#fff;padding:30px 40px">'+
+          '<div style="font-family:\'Space Grotesk\',sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#aaa">'+esc(promo.kicker)+'</div>'+
+          '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:23px;margin-top:7px;letter-spacing:-.02em">'+esc(promo.headline)+'</div>'+
+          '<div style="font-size:13px;color:#cfcfcf;margin-top:8px;max-width:62ch">'+esc(promo.sub)+'</div>'+
+          '<ul style="margin:14px 0 0;padding:0">'+bullets+'</ul>'+
+          '<div style="margin-top:18px;display:inline-block;background:#fff;color:#111;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;padding:12px 20px;border-radius:9px">'+esc(promo.ctaText)+' → '+esc((promo.ctaUrl||"").replace(/^https?:\/\//,""))+'</div>'+
+          '<div style="font-size:11.5px;color:#999;margin-top:16px">CartCoders · Certified Shopify Partner · 250+ projects across 25+ countries · cartcoders.com</div>'+
+        '</div>'+
+      '</div>';
+    return host.firstChild;
+  }
+
+  function captureTarget(){return buildReport();}
+  if($("#saveImg"))$("#saveImg").addEventListener("click",function(){toast("Preparing your report image…");loadScript("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js").then(function(){window.html2canvas(captureTarget(),{backgroundColor:"#ffffff",scale:2,useCORS:true}).then(function(cv){var a=document.createElement("a");a.href=cv.toDataURL("image/png");a.download=(document.body.dataset.calc||"estimate")+"-report.png";a.click();toast("Report image saved");});}).catch(function(){toast("Could not load image tool")});});
+  if($("#dlPdf"))$("#dlPdf").addEventListener("click",function(){toast("Building your PDF report…");loadScript("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js").then(function(){return loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");}).then(function(){window.html2canvas(captureTarget(),{backgroundColor:"#ffffff",scale:2,useCORS:true}).then(function(cv){
+      var jsPDF=window.jspdf.jsPDF,pdf=new jsPDF("p","pt","a4");
+      var pw=pdf.internal.pageSize.getWidth(),ph=pdf.internal.pageSize.getHeight();
+      var iw=pw,ih=cv.height*(pw/cv.width);
+      var img=cv.toDataURL("image/png"),y=0;
+      if(ih<=ph){pdf.addImage(img,"PNG",0,0,iw,ih);}
+      else{var left=ih;while(left>0){pdf.addImage(img,"PNG",0,y,iw,ih);left-=ph;if(left>0){pdf.addPage();y-=ph;}}}
+      pdf.save((document.body.dataset.calc||"estimate")+"-report.pdf");toast("PDF report downloaded");
+    });}).catch(function(){window.print();});});
 
   /* ---------- compare ---------- */
   var cmpOn=false;
@@ -187,40 +240,32 @@ var WEB3FORMS_KEY = "6609639b-4c84-4353-92e2-b75cb8167ec5";
   if(starsEl){
     var STAR="M12 2.5l2.9 6.2 6.6.7-4.9 4.5 1.4 6.6L12 17.8 6 21l1.4-6.6L2.5 9.9l6.6-.7z";
     var calcKey=document.body.dataset.calc||"calc";
-    var key="ccr_"+calcKey;                       // this device's vote for this calculator
+    var rkey="ccr_"+calcKey;
     var baseRating=parseFloat(document.body.dataset.rating||"4.8");
     var baseCount=parseInt(document.body.dataset.reviews||"500",10);
-    var myVote=parseInt(store.get(key)||"0",10);  // 0 = not yet voted on this device
-    function avg(){
-      var sum=baseRating*baseCount, cnt=baseCount;
-      if(myVote){sum+=myVote;cnt+=1;}
-      return {val:sum/cnt,count:cnt};
-    }
-    function paint(hover){
-      var a=avg(), shown=hover||Math.round(a.val);
+    var myVote=parseInt(store.get(rkey)||"0",10);
+    function rAvg(){var sum=baseRating*baseCount,cnt=baseCount;if(myVote){sum+=myVote;cnt++;}return {v:sum/cnt,c:cnt};}
+    function miniStars(val){var h='';for(var i=1;i<=5;i++){h+='<svg viewBox="0 0 24 24" style="width:15px;height:15px;vertical-align:-2px" class="'+(Math.round(val)>=i?"s-on":"s-off")+'"><path d="'+STAR+'"/></svg>';}return h;}
+    function drawStars(fill){
       starsEl.innerHTML="";
       for(var i=1;i<=5;i++){(function(i){
-        var b=document.createElement("button");b.type="button";
-        b.setAttribute("aria-label",i+" star"+(i>1?"s":""));
-        b.innerHTML='<svg viewBox="0 0 24 24" class="'+(shown>=i?"s-on":"s-off")+'"><path d="'+STAR+'"/></svg>';
+        var b=document.createElement("button");b.type="button";b.setAttribute("aria-label",i+" star"+(i>1?"s":""));
+        b.innerHTML='<svg viewBox="0 0 24 24" class="'+(fill>=i?"s-on":"s-off")+'"><path d="'+STAR+'"/></svg>';
         if(!myVote){
-          b.addEventListener("mouseenter",function(){paint(i)});
-          b.addEventListener("mouseleave",function(){paint(0)});
+          b.addEventListener("mouseenter",function(){drawStars(i)});
+          b.addEventListener("mouseleave",function(){drawStars(0)});
           b.addEventListener("click",function(){
-            myVote=i;store.set(key,String(i));
+            myVote=i;store.set(rkey,String(i));drawStars(i);rMeta();
             if($("#rateFb"))$("#rateFb").classList.add("on");
-            paint(0);meta();toast("Thanks — your rating was counted");
+            toast("Thanks — your "+i+"-star rating was counted");
           });
         }else{b.style.cursor="default";}
         starsEl.appendChild(b);
       })(i)}
     }
-    function meta(){
-      var a=avg();
-      if($("#rateMeta"))$("#rateMeta").innerHTML='<b>'+a.val.toFixed(1)+'</b> out of 5 · '+a.count.toLocaleString("en-US")+' ratings'+(myVote?' · you rated '+myVote+'/5':'');
-    }
+    function rMeta(){var a=rAvg();if($("#rateMeta"))$("#rateMeta").innerHTML='<span style="display:inline-flex;gap:2px;margin-right:8px">'+miniStars(a.v)+'</span><b>'+a.v.toFixed(1)+'</b> / 5 · '+a.c.toLocaleString("en-US")+' ratings'+(myVote?' · <span style="color:var(--ink)">you rated '+myVote+'★</span>':'');}
     if($("#fbSubmit"))$("#fbSubmit").addEventListener("click",function(){if($("#rateFb"))$("#rateFb").classList.remove("on");toast("Feedback sent — thank you");});
-    paint(0);meta();
+    drawStars(myVote);rMeta();
   }
 
   /* ---------- scroll-spy ---------- */
