@@ -9,6 +9,14 @@
    ██  This is the ONLY change you must make for the lead form to email you.██
    ███████████████████████████████████████████████████████████████████████ */
 var WEB3FORMS_KEY = "YOUR-WEB3FORMS-ACCESS-KEY";
+
+/* ███████████████████████████████████████████████████████████████████████
+   ██  (OPTIONAL) GOOGLE TAG MANAGER — paste your container ID below.      ██
+   ██  Get it free at tagmanager.google.com (looks like GTM-ABC1234).      ██
+   ██  Leave as-is to keep analytics off.                                  ██
+   ███████████████████████████████████████████████████████████████████████ */
+var GTM_ID = "GTM-XXXXXXX";
+/* ███████████████████████████████████████████████████████████████████████ */
 /* ███████████████████████████████████████████████████████████████████████ */
 
 (function(){
@@ -205,6 +213,12 @@ var WEB3FORMS_KEY = "YOUR-WEB3FORMS-ACCESS-KEY";
   /* ---------- init ---------- */
   if(typeof WEB3FORMS_KEY!=="undefined" && WEB3FORMS_KEY && WEB3FORMS_KEY.indexOf("YOUR-")!==0){
     $$('input[name="access_key"]').forEach(function(el){el.value=WEB3FORMS_KEY;});
+  }
+  // stamp the source page into the lead so you know which calculator it came from
+  $$('input[name="page_url"]').forEach(function(el){el.value=location.href;});
+  // optional Google Tag Manager
+  if(typeof GTM_ID!=="undefined" && GTM_ID && GTM_ID.indexOf("GTM-")===0 && GTM_ID!=="GTM-XXXXXXX"){
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',GTM_ID);
   }
   if($("#yr"))$("#yr").textContent=new Date().getFullYear();
   applyState();syncBoxes();render();
