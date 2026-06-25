@@ -1,37 +1,44 @@
-COST CALCULATORS — UPDATE & RE-UPLOAD GUIDE
-===========================================
-Site: https://cost-calculators.github.io/   (12 calculators + homepage)
+SHOPIFY COST CALCULATORS — v3 (all fixes applied)
+=================================================
+Live at: https://cost-calculators.github.io/   (homepage + 12 calculators)
 
-You only edit ONE file: assets/calc-app.js  (open in Notepad / TextEdit).
-At the very top are two clearly-boxed lines:
+ALREADY BAKED IN (no edits needed):
+  - Web3Forms key (leads go to the inbox tied to key 6609639b-...)
+  - Google Tag Manager GTM-P52T935Z (in <head> + after <body> on every page)
+  - Google Search Console meta verification tag on every page
+  - Branding: "Shopify Cost Calculators" everywhere
+  - The duplicate /calculators page is removed (homepage is the hub)
+  - Working star ratings, sticky live-estimate panel, fixed button hovers
+  - Per-page schema: WebPage, Breadcrumb, WebApplication, Product (rating+reviews),
+    HowTo, FAQ. Plus robots.txt and sitemap.xml.
 
-  1) LEAD EMAILS  -> var WEB3FORMS_KEY = "YOUR-WEB3FORMS-ACCESS-KEY";
-  2) ANALYTICS    -> var GTM_ID = "GTM-XXXXXXX";
+YOU STILL NEED TO DO TWO SMALL THINGS:
+  1) OG SOCIAL IMAGES (optional, for nice link previews)
+     - Create a folder named exactly:  og   (at the repo root, next to index.html)
+     - Add JPG images, 1200 x 630 px, named exactly:
+         og/home.jpg
+         og/shopify-store-development-cost-calculator.jpg
+         og/migration-cost-calculator.jpg
+         og/cro-roi-calculator.jpg
+         og/marketplace-development-cost-calculator.jpg
+         og/shopify-app-cost-calculator.jpg
+         og/redesign-roi-calculator.jpg
+         og/shopify-plus-roi-calculator.jpg
+         og/seo-roi-calculator.jpg
+         og/headless-roi-calculator.jpg
+         og/integration-cost-calculator.jpg
+         og/maintenance-cost-calculator.jpg
+         og/hire-shopify-developer-cost-calculator.jpg
+  2) GOOGLE SEARCH CONSOLE
+     - Add property https://cost-calculators.github.io/ , choose "HTML tag" method.
+       The verification tag is already in your pages, so just click Verify.
+     - Then submit sitemap.xml.
 
--------------------------------------------------------------------
-A) GET LEAD EMAILS  (where your contact-form leads land)
-   - Go to web3forms.com, enter the email you want leads sent to
-     (e.g. nilesh.shivlab@gmail.com), click "Create Access Key".
-   - A key arrives in that inbox. Paste it into line (1) above, keep quotes, save.
-   - That email address = whoever you used to create the key. To CHANGE the
-     destination email later, just create a new key with the new email and
-     replace it on line (1). (Web3Forms routes by key, so the key IS the setting.)
-   - Each lead email tells you which calculator it came from (subject line +
-     a "from_page" and "page_url" field), plus the visitor's estimate range.
-   - Free plan: 250 leads/month, stored 30 days. The key is safe to be public.
+RE-UPLOAD:
+  In your repo (cost-calculators/cost-calculators.github.io): Add file -> Upload files
+  -> drag in everything here (overwrite old files; DELETE the old calculators.html in
+  the repo if it's still there) -> Commit. Wait 1-2 min, hard-refresh (Ctrl+Shift+R).
 
-B) ANALYTICS (optional)
-   - Google Tag Manager: tagmanager.google.com -> create a container ->
-     copy the ID (GTM-XXXXXXX) -> paste into line (2), save. Done on every page.
-   - Google Search Console: easiest is the "HTML file" method -- in Search
-     Console choose URL-prefix https://cost-calculators.github.io/, pick the
-     HTML file verification, download the googleXXXX.html file, and upload it
-     into the repo (same place as index.html). OR, once GTM is live, use the
-     "Google Tag Manager" verification option. Then submit sitemap.xml.
-
-C) RE-UPLOAD
-   - In your repo (cost-calculators/cost-calculators.github.io): Add file ->
-     Upload files -> drag in everything from this folder -> Commit changes.
-   - Wait 1-2 minutes; refresh https://cost-calculators.github.io/ (Ctrl+Shift+R).
-
-That's it. Everything else (design, links, sitemap) is already wired for this address.
+NOTE on www: https://www.cost-calculators.github.io/ cannot be fixed on a github.io
+address (GitHub doesn't serve the www host). Your canonical tags already point Google
+to the correct non-www URLs, so search engines are unaffected.

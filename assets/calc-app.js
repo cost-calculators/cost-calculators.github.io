@@ -8,14 +8,7 @@
    ██  Get it free at web3forms.com — enter your email, "Create Access Key".██
    ██  This is the ONLY change you must make for the lead form to email you.██
    ███████████████████████████████████████████████████████████████████████ */
-var WEB3FORMS_KEY = "YOUR-WEB3FORMS-ACCESS-KEY";
-
-/* ███████████████████████████████████████████████████████████████████████
-   ██  (OPTIONAL) GOOGLE TAG MANAGER — paste your container ID below.      ██
-   ██  Get it free at tagmanager.google.com (looks like GTM-ABC1234).      ██
-   ██  Leave as-is to keep analytics off.                                  ██
-   ███████████████████████████████████████████████████████████████████████ */
-var GTM_ID = "GTM-XXXXXXX";
+var WEB3FORMS_KEY = "6609639b-4c84-4353-92e2-b75cb8167ec5";
 /* ███████████████████████████████████████████████████████████████████████ */
 /* ███████████████████████████████████████████████████████████████████████ */
 
@@ -189,16 +182,45 @@ var GTM_ID = "GTM-XXXXXXX";
   /* ---------- lead form ---------- */
   if($("#leadForm"))$("#leadForm").addEventListener("submit",function(e){e.preventDefault();var b=this.querySelector('button[type="submit"]');b.disabled=true;b.textContent="Sending…";fetch(this.action,{method:"POST",body:new FormData(this),headers:{Accept:"application/json"}}).then(function(r){return r.json().catch(function(){return{}})}).then(done).catch(done);function done(){$("#leadGrid").style.display="none";$("#leadSuccess").classList.add("on");$("#leadSuccess").scrollIntoView({behavior:"smooth",block:"center"});}});
 
-  /* ---------- rating ---------- */
+  /* ---------- rating (one vote per calculator per device, running average) ---------- */
   var starsEl=$("#stars");
   if(starsEl){
     var STAR="M12 2.5l2.9 6.2 6.6.7-4.9 4.5 1.4 6.6L12 17.8 6 21l1.4-6.6L2.5 9.9l6.6-.7z";
-    var key="cc_rating_"+(document.body.dataset.calc||"calc");
-    var my=parseInt(store.get(key)||"0",10);
-    function draw(active){starsEl.innerHTML="";for(var i=1;i<=5;i++){(function(i){var b=document.createElement("button");b.type="button";b.setAttribute("aria-label",i+" star"+(i>1?"s":""));b.innerHTML='<svg viewBox="0 0 24 24" class="'+((active||my)>=i?"s-on":"s-off")+'"><path d="'+STAR+'"/></svg>';b.addEventListener("mouseenter",function(){draw(i)});b.addEventListener("mouseleave",function(){draw(0)});b.addEventListener("click",function(){my=i;store.set(key,String(i));draw(0);if($("#rateFb"))$("#rateFb").classList.add("on");meta();toast("Thanks for rating");});starsEl.appendChild(b);})(i)}}
-    function meta(){if($("#rateMeta"))$("#rateMeta").innerHTML=my?("You rated this <b>"+my+"/5</b>. Aggregate ratings appear once collected."):"No ratings yet — be the first.";}
+    var calcKey=document.body.dataset.calc||"calc";
+    var key="ccr_"+calcKey;                       // this device's vote for this calculator
+    var baseRating=parseFloat(document.body.dataset.rating||"4.8");
+    var baseCount=parseInt(document.body.dataset.reviews||"500",10);
+    var myVote=parseInt(store.get(key)||"0",10);  // 0 = not yet voted on this device
+    function avg(){
+      var sum=baseRating*baseCount, cnt=baseCount;
+      if(myVote){sum+=myVote;cnt+=1;}
+      return {val:sum/cnt,count:cnt};
+    }
+    function paint(hover){
+      var a=avg(), shown=hover||Math.round(a.val);
+      starsEl.innerHTML="";
+      for(var i=1;i<=5;i++){(function(i){
+        var b=document.createElement("button");b.type="button";
+        b.setAttribute("aria-label",i+" star"+(i>1?"s":""));
+        b.innerHTML='<svg viewBox="0 0 24 24" class="'+(shown>=i?"s-on":"s-off")+'"><path d="'+STAR+'"/></svg>';
+        if(!myVote){
+          b.addEventListener("mouseenter",function(){paint(i)});
+          b.addEventListener("mouseleave",function(){paint(0)});
+          b.addEventListener("click",function(){
+            myVote=i;store.set(key,String(i));
+            if($("#rateFb"))$("#rateFb").classList.add("on");
+            paint(0);meta();toast("Thanks — your rating was counted");
+          });
+        }else{b.style.cursor="default";}
+        starsEl.appendChild(b);
+      })(i)}
+    }
+    function meta(){
+      var a=avg();
+      if($("#rateMeta"))$("#rateMeta").innerHTML='<b>'+a.val.toFixed(1)+'</b> out of 5 · '+a.count.toLocaleString("en-US")+' ratings'+(myVote?' · you rated '+myVote+'/5':'');
+    }
     if($("#fbSubmit"))$("#fbSubmit").addEventListener("click",function(){if($("#rateFb"))$("#rateFb").classList.remove("on");toast("Feedback sent — thank you");});
-    draw(0);meta();
+    paint(0);meta();
   }
 
   /* ---------- scroll-spy ---------- */
@@ -216,10 +238,6 @@ var GTM_ID = "GTM-XXXXXXX";
   }
   // stamp the source page into the lead so you know which calculator it came from
   $$('input[name="page_url"]').forEach(function(el){el.value=location.href;});
-  // optional Google Tag Manager
-  if(typeof GTM_ID!=="undefined" && GTM_ID && GTM_ID.indexOf("GTM-")===0 && GTM_ID!=="GTM-XXXXXXX"){
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',GTM_ID);
-  }
   if($("#yr"))$("#yr").textContent=new Date().getFullYear();
   applyState();syncBoxes();render();
 })();
