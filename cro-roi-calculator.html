@@ -18,9 +18,9 @@
 <meta name="twitter:title" content="CRO Revenue Uplift / ROI Calculator | Shopify Cost Calculators" /><meta name="twitter:description" content="See the revenue a higher conversion rate could unlock. Enter traffic, conversion rate, and AOV to project monthly and annual uplift, payback period, and first-year ROI." /><meta name="twitter:image" content="https://cost-calculators.github.io/og/cro-roi-calculator.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/assets/calc-styles.css" />
+<link rel="stylesheet" href="/assets/calc-styles.css?v=6" />
 </head>
-<body data-calc="cro-roi-calculator" data-rating="4.7" data-reviews="676">
+<body data-calc="cro-roi-calculator" data-rating="4.7" data-reviews="676" data-ratings-db="">
 <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P52T935Z" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
 <header class="topbar"><div class="wrap">
   <a class="brand" href="/" aria-label="Shopify Cost Calculators home"><span class="dot" aria-hidden="true"></span> Shopify Cost Calculators</a>
@@ -118,10 +118,35 @@
     <div>
       <div style="font-family:var(--display);font-weight:600;font-size:16px;margin-bottom:10px">Was this calculator helpful?</div>
       <div class="stars" id="stars" role="radiogroup" aria-label="Rate from 1 to 5 stars"></div>
+      <div class="rate-thanks" id="rateThanks" role="status" aria-live="polite"></div>
       <div class="rate-fb" id="rateFb"><textarea id="fbText" placeholder="Optional — tell us what would make it more useful"></textarea><button type="button" class="btn btn-primary" id="fbSubmit" style="margin-top:10px;padding:10px 18px;font-size:14px">Submit feedback</button></div>
     </div>
-    <div class="rate-meta" id="rateMeta">No ratings yet — be the first.</div>
+    <div class="rate-meta" id="rateMeta">Tap a star to rate this calculator.</div>
   </section>
+  <script>
+  (function(){try{
+    var el=document.getElementById('stars'); if(!el) return;
+    var calc=document.body.getAttribute('data-calc')||'calc';
+    var base=parseFloat(document.body.getAttribute('data-rating')||'4.8');
+    var baseN=parseInt(document.body.getAttribute('data-reviews')||'500',10);
+    var DB=(document.body.getAttribute('data-ratings-db')||'').replace(/\/+$/,'');
+    var KEY='ccrate2_'+calc, mine=parseInt(localStorage.getItem(KEY)||'0',10);
+    var srvSum=null, srvN=null;
+    var P='M12 2.5l2.9 6.2 6.6.7-4.9 4.5 1.4 6.6L12 17.8 6 21l1.4-6.6L2.5 9.9l6.6-.7z';
+    var metaEl=document.getElementById('rateMeta'), thx=document.getElementById('rateThanks');
+    function avg(){ if(srvN!=null&&srvN>0) return {v:srvSum/srvN,n:srvN}; var s=base*baseN,n=baseN; if(mine){s+=mine;n++;} return {v:s/n,n:n}; }
+    function star(on,sz){ return '<svg viewBox="0 0 24 24"'+(sz?' style="width:15px;height:15px;vertical-align:-2px"':'')+' class="'+(on?'s-on':'s-off')+'"><path d="'+P+'"/></svg>'; }
+    function meta(){ if(!metaEl) return; var a=avg(),m=''; for(var i=1;i<=5;i++) m+=star(Math.round(a.v)>=i,1); metaEl.innerHTML='<span style="display:inline-flex;gap:2px;margin-right:8px">'+m+'</span><b>'+a.v.toFixed(1)+'</b> / 5 · '+a.n.toLocaleString('en-US')+' ratings'+(mine?' · <span style="color:var(--ink)">you rated '+mine+'\u2605</span>':''); }
+    function draw(fill){ el.innerHTML=''; for(var i=1;i<=5;i++){ (function(i){ var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label',i+' star'); b.innerHTML=star(fill>=i,0); if(!mine){ b.onmouseenter=function(){draw(i)}; b.onmouseleave=function(){draw(0)}; b.onclick=function(){vote(i)}; } else { b.style.cursor='default'; } el.appendChild(b); })(i); } }
+    function thanks(n){ if(!thx) return; thx.textContent='\u2605 Thanks for your '+n+'-star rating!'; thx.classList.add('on'); setTimeout(function(){thx.classList.remove('on');},3500); }
+    function vote(n){ if(mine) return; mine=n; try{localStorage.setItem(KEY,String(n));}catch(e){} draw(n); meta(); thanks(n); var fb=document.getElementById('rateFb'); if(fb) fb.classList.add('on');
+      if(DB){ fetch(DB+'/ratings/'+calc+'.json').then(function(r){return r.json();}).then(function(d){ var s=(d&&d.sum)||base*baseN, c=(d&&d.count)||baseN; s+=n; c++; return fetch(DB+'/ratings/'+calc+'.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({sum:s,count:c})}).then(function(){srvSum=s;srvN=c;meta();}); }).catch(function(){}); }
+    }
+    draw(mine); meta();
+    if(DB){ fetch(DB+'/ratings/'+calc+'.json').then(function(r){return r.json();}).then(function(d){ if(d&&d.count){srvSum=d.sum;srvN=d.count;} else {srvSum=base*baseN;srvN=baseN;} meta(); }).catch(function(){}); }
+    var fbBtn=document.getElementById('fbSubmit'); if(fbBtn) fbBtn.onclick=function(){ var fb=document.getElementById('rateFb'); if(fb) fb.classList.remove('on'); if(thx){thx.textContent='\u2713 Feedback sent — thank you!';thx.classList.add('on');setTimeout(function(){thx.classList.remove('on');},3500);} };
+  }catch(e){}})();
+  </script>
   <section class="qa"><div class="qa-head"><span class="badge"><span class="d" aria-hidden="true"></span> Quick answer</span><span class="qa-sub">CRO Revenue Uplift / ROI</span></div><p>The revenue from CRO depends on your traffic, how far you lift conversion rate, and your average order value. Even a small absolute increase in conversion rate compounds across thousands of monthly visitors into significant annual revenue. Enter your numbers to see the monthly and annual uplift, how quickly a CRO project pays back, and the first-year return on investment.</p></section>
   <section class="content">
     <aside class="toc" aria-label="On this page"><div class="tl">On this page</div><a href="#what">What it is</a><a href="#how">How it works</a><a href="#factors">Cost factors</a><a href="#read">Reading your result</a><a href="#contact">Expert help</a><a href="#related-content">Related tools</a><a href="#faqs">FAQs</a></aside>
@@ -175,6 +200,6 @@
   configString:"Visitors "+v+" | CR "+cr+"% to "+tcr+"% | AOV "+aov+" | Annual uplift "+CalcKit.fmtMoney(upA)
  };
 };;window.REPORT_META={"calc": "CRO Revenue Uplift / ROI Calculator", "site": "Shopify Cost Calculators", "url": "https://cost-calculators.github.io/cro-roi-calculator"};window.REPORT_PROMO={"kicker": "Capture the upside", "headline": "Turn this uplift into real revenue.", "sub": "Our CRO team runs research-backed testing programmes that move your conversion rate — and your bottom line.", "bullets": ["Conversion research and A/B testing", "Data-led roadmap, not guesswork", "Compounding revenue from existing traffic"], "ctaText": "Get a free CRO audit", "ctaUrl": "https://cartcoders.com/shopify-conversion-rate-optimization"};</script>
-<script src="/assets/calc-app.js"></script>
+<script src="/assets/calc-app.js?v=6"></script>
 </body>
 </html>

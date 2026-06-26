@@ -10,6 +10,13 @@
    ███████████████████████████████████████████████████████████████████████ */
 var WEB3FORMS_KEY = "6609639b-4c84-4353-92e2-b75cb8167ec5";
 /* ███████████████████████████████████████████████████████████████████████ */
+/* ███████████████████████████████████████████████████████████████████████
+   ██  (OPTIONAL) REAL SHARED RATINGS — paste a Firebase Realtime DB base   ██
+   ██  URL to make star ratings GLOBAL and persistent across all visitors.  ██
+   ██  Example: "https://yourproject-default-rtdb.firebaseio.com"           ██
+   ██  Leave "" and ratings still work locally (one vote per device).       ██
+   ███████████████████████████████████████████████████████████████████████ */
+var RATINGS_DB = "";
 /* ███████████████████████████████████████████████████████████████████████ */
 
 (function(){
@@ -235,38 +242,7 @@ var WEB3FORMS_KEY = "6609639b-4c84-4353-92e2-b75cb8167ec5";
   /* ---------- lead form ---------- */
   if($("#leadForm"))$("#leadForm").addEventListener("submit",function(e){e.preventDefault();var b=this.querySelector('button[type="submit"]');b.disabled=true;b.textContent="Sending…";fetch(this.action,{method:"POST",body:new FormData(this),headers:{Accept:"application/json"}}).then(function(r){return r.json().catch(function(){return{}})}).then(done).catch(done);function done(){$("#leadGrid").style.display="none";$("#leadSuccess").classList.add("on");$("#leadSuccess").scrollIntoView({behavior:"smooth",block:"center"});}});
 
-  /* ---------- rating (one vote per calculator per device, running average) ---------- */
-  var starsEl=$("#stars");
-  if(starsEl){
-    var STAR="M12 2.5l2.9 6.2 6.6.7-4.9 4.5 1.4 6.6L12 17.8 6 21l1.4-6.6L2.5 9.9l6.6-.7z";
-    var calcKey=document.body.dataset.calc||"calc";
-    var rkey="ccr_"+calcKey;
-    var baseRating=parseFloat(document.body.dataset.rating||"4.8");
-    var baseCount=parseInt(document.body.dataset.reviews||"500",10);
-    var myVote=parseInt(store.get(rkey)||"0",10);
-    function rAvg(){var sum=baseRating*baseCount,cnt=baseCount;if(myVote){sum+=myVote;cnt++;}return {v:sum/cnt,c:cnt};}
-    function miniStars(val){var h='';for(var i=1;i<=5;i++){h+='<svg viewBox="0 0 24 24" style="width:15px;height:15px;vertical-align:-2px" class="'+(Math.round(val)>=i?"s-on":"s-off")+'"><path d="'+STAR+'"/></svg>';}return h;}
-    function drawStars(fill){
-      starsEl.innerHTML="";
-      for(var i=1;i<=5;i++){(function(i){
-        var b=document.createElement("button");b.type="button";b.setAttribute("aria-label",i+" star"+(i>1?"s":""));
-        b.innerHTML='<svg viewBox="0 0 24 24" class="'+(fill>=i?"s-on":"s-off")+'"><path d="'+STAR+'"/></svg>';
-        if(!myVote){
-          b.addEventListener("mouseenter",function(){drawStars(i)});
-          b.addEventListener("mouseleave",function(){drawStars(0)});
-          b.addEventListener("click",function(){
-            myVote=i;store.set(rkey,String(i));drawStars(i);rMeta();
-            if($("#rateFb"))$("#rateFb").classList.add("on");
-            toast("Thanks — your "+i+"-star rating was counted");
-          });
-        }else{b.style.cursor="default";}
-        starsEl.appendChild(b);
-      })(i)}
-    }
-    function rMeta(){var a=rAvg();if($("#rateMeta"))$("#rateMeta").innerHTML='<span style="display:inline-flex;gap:2px;margin-right:8px">'+miniStars(a.v)+'</span><b>'+a.v.toFixed(1)+'</b> / 5 · '+a.c.toLocaleString("en-US")+' ratings'+(myVote?' · <span style="color:var(--ink)">you rated '+myVote+'★</span>':'');}
-    if($("#fbSubmit"))$("#fbSubmit").addEventListener("click",function(){if($("#rateFb"))$("#rateFb").classList.remove("on");toast("Feedback sent — thank you");});
-    drawStars(myVote);rMeta();
-  }
+  /* ---------- rating: handled by a self-contained inline script in each page ---------- */
 
   /* ---------- scroll-spy ---------- */
   (function(){

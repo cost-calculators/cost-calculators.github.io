@@ -1,47 +1,46 @@
-SHOPIFY COST CALCULATORS — v4
+SHOPIFY COST CALCULATORS — v6
 =============================
 Live at: https://cost-calculators.github.io/
 
-WHAT CHANGED IN THIS VERSION
-  - Branding fixed to "Shopify Cost Calculators" everywhere.
-  - Duplicate /calculators page removed (homepage is the hub).
-  - Menu redesigned: bigger, cleaner, meaningful items + animated underline.
-  - Button hovers fixed (text always visible).
-  - Live-estimate panel is now sticky.
-  - Star rating works: one vote per calculator per device, joins a running average.
-  - Download PDF / Save Image now produce a PREMIUM REPORT (your inputs +
-    estimate tables + a CartCoders promo tailored to each calculator), not just
-    the result box.
-  - Every page rewritten to 1,300-1,900 words, keyword-optimized (primary +
-    semantic terms) for SEO/AEO, each with 1 authoritative outbound link.
-  - Per-page schema: WebPage, Breadcrumb, WebApplication, Product (rating 4.7-5.0,
-    400-800 reviews, price $0-400), HowTo, FAQ. Plus robots.txt + sitemap.xml.
-  - Web3Forms key, Google Tag Manager (GTM-P52T935Z), and Search Console meta
-    are all baked in. Nothing to edit.
+RATING SYSTEM — REBUILT FROM SCRATCH
+------------------------------------
+The rating code now lives INSIDE each calculator page (not in the shared JS
+file), so a cached/old script can no longer break it. When you re-upload the
+pages, the new rating goes live with them.
 
-YOU STILL NEED (optional):
-  1) OG images -> folder "og" at repo root, 1200x630 JPGs named:
-     og/home.jpg and og/<page-slug>.jpg (one per calculator). Full list below.
-  2) Search Console -> add property, pick "HTML tag" (tag already present), Verify,
-     then submit sitemap.xml.
+What it does now:
+  * 5 clickable stars (empty until you rate).
+  * Click a star -> a "Thanks for your rating!" popup appears, the star locks,
+    your vote is added to the total, and the average + count update instantly.
+  * One vote per calculator per device (you can't rate the same one twice).
 
-OG IMAGE FILENAMES (folder: og/, size: 1200 x 630 px, .jpg):
-  og/home.jpg
-  og/shopify-store-development-cost-calculator.jpg
-  og/migration-cost-calculator.jpg
-  og/cro-roi-calculator.jpg
-  og/marketplace-development-cost-calculator.jpg
-  og/shopify-app-cost-calculator.jpg
-  og/redesign-roi-calculator.jpg
-  og/shopify-plus-roi-calculator.jpg
-  og/seo-roi-calculator.jpg
-  og/headless-roi-calculator.jpg
-  og/integration-cost-calculator.jpg
-  og/maintenance-cost-calculator.jpg
-  og/hire-shopify-developer-cost-calculator.jpg
+MAKE RATINGS GLOBAL (optional, free):
+  By itself a static site can only store a vote on each visitor's own device.
+  To share ONE real count across all visitors, connect a free Firebase database:
+    1. console.firebase.google.com -> Add project.
+    2. Build -> Realtime Database -> Create -> Test mode. Copy the URL
+       (https://yourproject-default-rtdb.firebaseio.com).
+    3. In build (or ask me), set RATINGS_DB to that URL. Every page's <body> has
+       a data-ratings-db attribute the rating reads automatically.
+  Or just send me the URL and I'll bake it in.
 
-RE-UPLOAD: in your repo, Add file -> Upload files -> drag everything here
-(overwrite) -> Commit. Wait 1-2 min, hard-refresh (Ctrl+Shift+R).
+MOBILE DESIGN — FIXED (desktop unchanged)
+-----------------------------------------
+  Added phone-only media queries:
+  * Top bar tidied: brand truncates cleanly, "Talk to an Expert" button sized to
+    fit on one line (no more overlap/ugly wrap).
+  * Calculator is far more compact: tighter padding, options laid out 2-across
+    instead of 1 (about half the height), smaller hero, compact result panel,
+    16px inputs so iOS doesn't zoom. It's no longer 2-3 screens of scrolling.
 
-NOTE: www.cost-calculators.github.io cannot be redirected on a github.io address
-(GitHub doesn't serve the www host). Canonicals already point to the non-www URLs.
+EVERYTHING ELSE (already in): branding, removed duplicate page, redesigned menu,
+fixed button hovers, sticky live estimate, premium PDF/Image report with a
+per-calculator CartCoders promo, 1,300-1,900 word keyword-optimised pages with an
+authority link each, full schema (incl. Product rating + HowTo + FAQ), robots.txt
++ sitemap.xml, Web3Forms key, GTM GTM-P52T935Z, Search Console tag.
+
+RE-UPLOAD: repo -> Add file -> Upload files -> drag everything here (overwrite)
+-> Commit. Wait 1-2 min, then HARD-REFRESH (Ctrl+Shift+R) or open on your phone.
+
+Optional: OG images in folder "og" (1200x630 jpgs); verify + submit sitemap in
+Search Console. www on github.io can't be redirected (custom domain only).

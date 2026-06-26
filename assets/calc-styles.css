@@ -264,3 +264,47 @@ footer a:hover{color:var(--ink)}
 .pill{display:inline-block;font-family:var(--display);font-size:10px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--line);border-radius:20px;padding:3px 9px;color:var(--ink-2);width:fit-content}
 
 @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;scroll-behavior:auto !important}}
+
+/* ---------- rating thank-you popup ---------- */
+.rate-thanks{margin-top:12px;display:inline-block;opacity:0;transform:translateY(6px);transition:opacity .25s ease,transform .25s ease;background:var(--ink);color:#fff;font-family:var(--display);font-weight:600;font-size:13px;padding:9px 15px;border-radius:9px;pointer-events:none;box-shadow:0 8px 22px -12px rgba(0,0,0,.5)}
+.rate-thanks.on{opacity:1;transform:translateY(0)}
+
+/* ============ MOBILE LAYOUT (phones) — does not affect desktop ============ */
+@media(max-width:600px){
+  .wrap{padding-left:16px;padding-right:16px}
+  /* top bar: keep brand + Talk button tidy on one line */
+  .topbar .wrap{height:58px}
+  .brand{font-size:16px;gap:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1 1 auto}
+  .brand .dot{width:10px;height:10px;flex:none}
+  .topbar nav{gap:0;flex:none}
+  .topbar .talk{font-size:13px;font-weight:600;padding:9px 14px;white-space:nowrap;flex:none}
+  /* hero: tighter */
+  .hero{padding:8px 0 2px}
+  .hero h1{font-size:clamp(23px,7vw,30px);line-height:1.08}
+  .hero .lede{font-size:14.5px;margin-top:8px}
+  .hero-cta{margin-top:14px;gap:8px}
+  .hero-cta .btn{flex:1 1 auto;justify-content:center;padding:12px 14px}
+  /* calculator: much more compact so it isn't 3 screens tall */
+  .calc-layout{gap:14px}
+  .inputs{padding:16px !important}
+  .fieldset{padding:14px 0}
+  .fieldset:first-child{padding-top:2px}
+  .opts{grid-template-columns:1fr 1fr;gap:8px}        /* 2 across = half the height */
+  .opt{padding:10px 30px 10px 11px}
+  .opt .t{font-size:13px}
+  .opt .d{font-size:11px;margin-top:1px}
+  .opt .check{top:9px;right:9px;width:15px;height:15px}
+  .result{padding:18px}
+  .field input,.field select,.numwrap input,select,input[type=number]{font-size:16px}  /* avoid iOS zoom */
+  /* rating: bigger tap targets */
+  .rate{padding:18px 16px;gap:14px}
+  .stars{gap:8px}
+  .stars svg{width:32px;height:32px}
+  .stars button{padding:5px}
+  .rate-meta{font-size:13px;width:100%}
+}
+@media(max-width:380px){
+  .brand{font-size:14.5px}
+  .topbar .talk{font-size:12px;padding:8px 11px}
+  .opts{grid-template-columns:1fr}                    /* very small phones: single column */
+}
