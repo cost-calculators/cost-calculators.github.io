@@ -262,3 +262,18 @@ var RATINGS_DB = "";
   if($("#yr"))$("#yr").textContent=new Date().getFullYear();
   applyState();syncBoxes();render();
 })();
+
+/* ---------- reveal-on-scroll (neobrutalist entrance) — independent of calc form ---------- */
+(function(){
+  try{
+    function go(){
+      var els=document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+      var io=new IntersectionObserver(function(ents){
+        ents.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+      },{rootMargin:'0px 0px -8% 0px',threshold:0.08});
+      els.forEach(function(e){io.observe(e)});
+    }
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',go); else go();
+  }catch(e){ document.querySelectorAll('.reveal').forEach(function(x){x.classList.add('in')}); }
+})();

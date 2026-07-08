@@ -1,48 +1,22 @@
-SHOPIFY COST CALCULATORS — v7  (now 24 calculators)
-===================================================
+SHOPIFY COST CALCULATORS - v8  (NEOBRUTALIST BLACK & WHITE REDESIGN)
+===================================================================
 Live at: https://cost-calculators.github.io/
 
-WHAT'S NEW: 12 ADDITIONAL CALCULATORS
--------------------------------------
-All are new pages (no cannibalization with your existing 12). Each one works
-end-to-end and already has full schema, the premium PDF/Image report with a
-CartCoders promo, the rating widget, the mobile layout, and homepage cards:
+WHAT CHANGED - full visual redesign in a black & white "neobrutalist" style:
+  * Thick 2px black borders + hard offset shadows on every card, button and input.
+  * Press-effect buttons (shift + shadow shrink on hover).
+  * Pill badges (rotated) + italic serif accents (Newsreader font).
+  * Hand-drawn doodles (stars, sparkles, squiggles) + squiggle underlines.
+  * Reveal-on-scroll entrance animations across sections.
+  * Homepage now has a STACKING-CARD scroll effect ("Why these tools", 5 cards)
+    and the 24 calculators are split into two labelled groups
+    (Dev & project cost / Store & finance).
+  * Pure black/white/grey palette throughout - no colour.
 
-  1.  shopify-transaction-fee-calculator      (how much Shopify takes per sale)
-  2.  shopify-profit-margin-calculator        (true net profit per order)
-  3.  break-even-calculator                   (units/revenue to break even)
-  4.  customer-lifetime-value-calculator      (LTV + max CAC)
-  5.  customer-acquisition-cost-calculator    (CAC, payback, LTV:CAC)
-  6.  average-order-value-calculator          (AOV + uplift upside)
-  7.  roas-calculator                         (ROAS + break-even ROAS)
-  8.  email-marketing-roi-calculator          (email & SMS ROI)
-  9.  free-shipping-threshold-calculator      (profit-safe free-ship bar)
-  10. return-cost-calculator                  (true cost of returns)
-  11. mrr-churn-calculator                    (subscription MRR & churn)
-  12. discount-profit-impact-calculator       (promo profit impact)
-
-IMPORTANT — CONTENT IS PLACEHOLDER ON THE 12 NEW PAGES
-  The calculators, numbers, schema, FAQs and layout are final, but the written
-  intro/sections are placeholder copy. Replace them with your own content when
-  ready (the calculators will keep working unchanged).
-
-OG IMAGES (optional): add these 12 to your existing og/ folder, 1200x630 jpg:
-  og/shopify-transaction-fee-calculator.jpg
-  og/shopify-profit-margin-calculator.jpg
-  og/break-even-calculator.jpg
-  og/customer-lifetime-value-calculator.jpg
-  og/customer-acquisition-cost-calculator.jpg
-  og/average-order-value-calculator.jpg
-  og/roas-calculator.jpg
-  og/email-marketing-roi-calculator.jpg
-  og/free-shipping-threshold-calculator.jpg
-  og/return-cost-calculator.jpg
-  og/mrr-churn-calculator.jpg
-  og/discount-profit-impact-calculator.jpg
-
-ALSO UPDATED: sitemap.xml now lists all 24 calculators + the homepage.
-After uploading, resubmit sitemap.xml in Search Console so Google finds them.
+All 24 calculators still work exactly as before; only the look changed.
 
 RE-UPLOAD: repo -> Add file -> Upload files -> drag everything here (overwrite)
--> Commit. The 12 new files are brand-new pages; the rest overwrite cleanly.
-Wait 1-2 min, then hard-refresh (Ctrl+Shift+R).
+-> Commit. Wait 1-2 min, then HARD-REFRESH (Ctrl+Shift+R). Assets are version-
+stamped (?v=7) so the new look loads immediately.
+
+Nothing else to configure. (Optional, unchanged: og/ images, Search Console.)
