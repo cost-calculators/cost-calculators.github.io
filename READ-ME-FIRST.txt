@@ -1,22 +1,19 @@
-SHOPIFY COST CALCULATORS - v8  (NEOBRUTALIST BLACK & WHITE REDESIGN)
-===================================================================
+SHOPIFY COST CALCULATORS - v9  (neobrutalist B&W - CRASH FIXED)
+==============================================================
 Live at: https://cost-calculators.github.io/
 
-WHAT CHANGED - full visual redesign in a black & white "neobrutalist" style:
-  * Thick 2px black borders + hard offset shadows on every card, button and input.
-  * Press-effect buttons (shift + shadow shrink on hover).
-  * Pill badges (rotated) + italic serif accents (Newsreader font).
-  * Hand-drawn doodles (stars, sparkles, squiggles) + squiggle underlines.
-  * Reveal-on-scroll entrance animations across sections.
-  * Homepage now has a STACKING-CARD scroll effect ("Why these tools", 5 cards)
-    and the 24 calculators are split into two labelled groups
-    (Dev & project cost / Store & finance).
-  * Pure black/white/grey palette throughout - no colour.
+FIXED IN THIS BUILD:
+  * Homepage was hiding all 24 calculators. Cause: the scroll-reveal animation
+    left cards invisible because the homepage didn't run the animation script.
+    Reveal is now FAIL-SAFE (content shows even if the script doesn't run) and
+    an inline reveal script runs on every page. All 24 cards show again.
+  * The 5 big full-width blocks you saw were the "Why these tools" stacking
+    cards (a scroll effect), not the calculators. The real 24 calculators sit
+    below them in a 3-column grid.
+  * Calculator pages: the Definition / formula / key boxes no longer stretch
+    wide - they now match the text width, and the contents sidebar is clean.
 
-All 24 calculators still work exactly as before; only the look changed.
+Assets are version-stamped (?v=8), so the fixes load immediately.
 
 RE-UPLOAD: repo -> Add file -> Upload files -> drag everything here (overwrite)
--> Commit. Wait 1-2 min, then HARD-REFRESH (Ctrl+Shift+R). Assets are version-
-stamped (?v=7) so the new look loads immediately.
-
-Nothing else to configure. (Optional, unchanged: og/ images, Search Console.)
+-> Commit. Wait 1-2 min, then HARD-REFRESH (Ctrl+Shift+R).

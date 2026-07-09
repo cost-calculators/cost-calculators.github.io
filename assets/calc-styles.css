@@ -351,10 +351,14 @@ html,body{background:var(--nb-bg);color:var(--nb-ink)}
 .crumbs a{font-weight:600}
 
 /* ---------- cards: 2px border + hard shadow ---------- */
-.calc-card,.result,.hub-card,.rel-card,.factor,.faq,.defbox,.keybox,.formulabox,.pkg,
-.lead,.lead-success,.cmp,.qa,.compare-row,.toc,.r-box{
+.calc-card,.result,.hub-card,.rel-card,.factor,.faq,.pkg,
+.lead,.lead-success,.cmp,.qa,.compare-row,.r-box{
   border:2px solid var(--nb-ink) !important;border-radius:16px;background:var(--nb-card);
   box-shadow:5px 6px 0 var(--nb-sh)}
+.defbox,.keybox,.formulabox{border:2px solid var(--nb-ink);border-radius:14px;
+  box-shadow:3px 4px 0 var(--nb-sh);background:#fff;max-width:74ch}
+.formulabox{overflow-x:auto}
+.toc{border:none !important;box-shadow:none !important;background:transparent}
 .hub-card{padding:22px;transition:transform .13s ease,box-shadow .13s ease}
 .hub-card:hover,.rel-card:hover{transform:translate(-1px,-2px);box-shadow:7px 9px 0 var(--nb-sh)}
 .hub-card .tier{display:inline-block;align-self:flex-start;border:2px solid var(--nb-ink);background:#fff;
@@ -406,9 +410,9 @@ html,body{background:var(--nb-bg);color:var(--nb-ink)}
 .hero>*{position:relative;z-index:1}
 
 /* ---------- reveal on scroll ---------- */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
-.reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
+html.reveal-on .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+html.reveal-on .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){html.reveal-on .reveal{opacity:1;transform:none;transition:none}}
 
 /* ---------- stacking cards (scroll effect) ---------- */
 .stack-wrap{max-width:960px;margin:0 auto}
