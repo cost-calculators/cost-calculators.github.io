@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Customer Acquisition Cost Calculator | Shopify Cost Calculators" /><meta name="twitter:description" content="Calculate customer acquisition cost (CAC), payback period, and your LTV:CAC ratio. Enter marketing spend, new customers, AOV, margin, and order frequency." /><meta name="twitter:image" content="https://cost-calculators.github.io/og/customer-acquisition-cost-calculator.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@1,400;1,500;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/assets/calc-styles.css?v=8" />
+<link rel="stylesheet" href="/assets/calc-styles.css?v=9" />
 </head>
 <body data-calc="customer-acquisition-cost-calculator" data-rating="4.8" data-reviews="559" data-ratings-db="">
 <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P52T935Z" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
@@ -77,12 +77,13 @@
       </aside>
     </div>
       <div id="comparePanel">
+        <div class="cmp-head"><span class="tag">Scenario comparison</span></div>
         <div class="cmp">
           <div class="col"><h4>Option A — current selection</h4><div class="cbig num" id="cmpA">$0</div><div class="r-sub" id="cmpAmeta"></div></div>
           <div class="col"><h4 id="cmpBtitle">Option B — snapshot</h4><div class="cbig num" id="cmpB">—</div><div class="r-sub">Set your inputs, then <button type="button" id="snapB" style="border:none;background:none;color:var(--ink);text-decoration:underline;cursor:pointer;padding:0;font:inherit">save as Option B</button> and adjust again.</div></div>
         </div>
       </div>
-    <div class="defbox" style="margin-top:22px"><span class="tag">Your input summary</span><div id="rSummary"></div></div>
+    <div class="summary-box"><span class="tag">Your input summary</span><div id="rSummary" class="sum-grid"></div></div>
   </section>
   <section class="lead" id="detailed">
     <div class="lead-grid" id="leadGrid">
@@ -163,7 +164,7 @@
       <h2 id="factors" class="sr-only">Factors</h2><div class="factors"><div class="factor"><h3>Marketing spend</h3><p>All sales and marketing costs for the period, not just ad spend.</p></div><div class="factor"><h3>New customers</h3><p>Only genuinely new customers acquired by that spend.</p></div><div class="factor"><h3>Gross margin</h3><p>Determines the profit each order contributes toward earning back CAC.</p></div><div class="factor"><h3>Order frequency</h3><p>More repeat orders shorten payback and raise the LTV:CAC ratio.</p></div></div>
       <div class="keybox"><span class="tag">Key takeaways</span><ul style="margin:0"><li>Free and instant - no sign-up required.</li><li>Built for Shopify and ecommerce stores.</li><li>Use real numbers to plan with confidence.</li><li>Turn the result into action with CartCoders.</li></ul></div>
       <h2 id="related-content">Related calculators</h2><p>Planning a project usually means weighing more than one number. These tools cover the decisions next to this one:</p><ul><li><a href="/customer-lifetime-value-calculator" style="text-decoration:underline">Customer Lifetime Value Calculator</a> — what a customer is worth</li><li><a href="/roas-calculator" style="text-decoration:underline">ROAS Calculator</a> — ad spend efficiency</li><li><a href="/email-marketing-roi-calculator" style="text-decoration:underline">Email & SMS ROI Calculator</a> — owned-channel revenue</li></ul>
-      <h2 id="faqs">Frequently asked questions</h2><div class="faq"><details><summary>How do I calculate CAC?</summary><p>Divide your total sales and marketing spend for a period by the number of new customers it acquired. This calculator also estimates payback period and your LTV:CAC ratio.</p></details><details><summary>What is a good CAC payback period?</summary><p>Under about twelve months is healthy for most ecommerce brands, and faster is better because it recycles cash into more growth. Subscription and high-repeat businesses can tolerate longer paybacks.</p></details><details><summary>How do I reduce CAC?</summary><p>Improve conversion rate so more visitors become customers, sharpen targeting and creative, and lean on owned channels like email, SMS, and referrals that cost less than paid media.</p></details></div>
+      <h2 id="faqs">Frequently asked questions</h2><div class="faq"><details open><summary>How do I calculate CAC?</summary><div class="faq-a"><p>Divide your total sales and marketing spend for a period by the number of new customers it acquired. This calculator also estimates payback period and your LTV:CAC ratio.</p></div></details><details open><summary>What is a good CAC payback period?</summary><div class="faq-a"><p>Under about twelve months is healthy for most ecommerce brands, and faster is better because it recycles cash into more growth. Subscription and high-repeat businesses can tolerate longer paybacks.</p></div></details><details open><summary>How do I reduce CAC?</summary><div class="faq-a"><p>Improve conversion rate so more visitors become customers, sharpen targeting and creative, and lean on owned channels like email, SMS, and referrals that cost less than paid media.</p></div></details></div>
     </article>
   </section>
   <section class="related reveal"><div class="section-head"><h2>Keep planning</h2></div><div class="rel-grid"><a class="rel-card" href="https://cartcoders.com/shopify-conversion-rate-optimization"><span class="k">Service</span><span class="t">Conversion Rate Optimization</span><span class="a">Done-for-you by CartCoders.</span></a><a class="rel-card" href="/customer-lifetime-value-calculator"><span class="k">Calculator</span><span class="t">Customer Lifetime Value</span><span class="a">what a customer is worth</span></a><a class="rel-card" href="/roas-calculator"><span class="k">Calculator</span><span class="t">ROAS</span><span class="a">ad spend efficiency</span></a><a class="rel-card" href="https://cartcoders.com/blog"><span class="k">Reading</span><span class="t">Shopify Growth Blog</span><span class="a">Guides & benchmarks.</span></a></div></section>
@@ -188,7 +189,7 @@
     shareText:"I used this free CAC calculator to check my acquisition cost and payback period.",
     configString:"CAC "+CalcKit.fmtMoney(cac)+" | LTV:CAC "+ratio.toFixed(1)+":1"};
   };;window.REPORT_META={"calc": "Customer Acquisition Cost Calculator", "site": "Shopify Cost Calculators", "url": "https://cost-calculators.github.io/customer-acquisition-cost-calculator"};window.REPORT_PROMO={"kicker": "CartCoders - Certified Shopify Experts", "headline": "Make acquisition pay back faster.", "sub": "We lift conversion and retention so every acquired customer is worth more and earns back sooner.", "bullets": ["Conversion rate optimisation", "Retention & repeat-purchase flows", "Landing page and funnel work"], "ctaText": "Talk to a growth expert", "ctaUrl": "https://cartcoders.com/contact-us"};</script>
-<script src="/assets/calc-app.js?v=8"></script>
+<script src="/assets/calc-app.js?v=9"></script>
 <script>(function(){try{var d=document,de=d.documentElement;if(!('IntersectionObserver'in window))return;de.className+=' reveal-on';var run=function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px',threshold:0.08});d.querySelectorAll('.reveal').forEach(function(x){io.observe(x);});};if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',run);else run();}catch(e){}})();</script>
 </body>
 </html>

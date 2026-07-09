@@ -1,19 +1,22 @@
-SHOPIFY COST CALCULATORS - v9  (neobrutalist B&W - CRASH FIXED)
-==============================================================
-Live at: https://cost-calculators.github.io/
+SHOPIFY COST CALCULATORS - v10  (calculator-page polish)
+========================================================
+Live at: https://cost-calculators.github.io/  ·  24 calculators
 
-FIXED IN THIS BUILD:
-  * Homepage was hiding all 24 calculators. Cause: the scroll-reveal animation
-    left cards invisible because the homepage didn't run the animation script.
-    Reveal is now FAIL-SAFE (content shows even if the script doesn't run) and
-    an inline reveal script runs on every page. All 24 cards show again.
-  * The 5 big full-width blocks you saw were the "Why these tools" stacking
-    cards (a scroll effect), not the calculators. The real 24 calculators sit
-    below them in a 3-column grid.
-  * Calculator pages: the Definition / formula / key boxes no longer stretch
-    wide - they now match the text width, and the contents sidebar is clean.
+FIXES IN THIS BUILD (per your list):
+  1. Top badge ("Free ... tool - No sign-up") now sits tilted and STRAIGHTENS
+     on hover, then tilts back when you move away.
+  2/7. "Your input summary" is redesigned as a proper bordered card with a
+     clean multi-column grid - no more ugly full-width empty row.
+  3. "Key takeaways" is now a tilted card that squares up on hover.
+  4. FAQs fully redesigned: each Q&A is its own bordered card with spacing,
+     a clear +/- toggle, and ALL are OPEN by default (click to collapse).
+  5. "Keep planning" cards are tilted (alternating) and square up on hover.
+  6. The "Compare against a second scenario" toggle and the comparison panel
+     are redesigned as clean bordered cards (no more full-width strip).
+  8. Dropdowns now have an attractive black arrow-tab and press feedback.
 
-Assets are version-stamped (?v=8), so the fixes load immediately.
+All 24 calculators still work exactly as before. Assets are version-stamped
+(?v=9) so the changes load immediately.
 
 RE-UPLOAD: repo -> Add file -> Upload files -> drag everything here (overwrite)
 -> Commit. Wait 1-2 min, then HARD-REFRESH (Ctrl+Shift+R).

@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Average Order Value Calculator | Shopify Cost Calculators" /><meta name="twitter:description" content="Calculate your average order value (AOV) and model the revenue upside of raising it. Enter revenue, orders, and a target uplift to see the impact." /><meta name="twitter:image" content="https://cost-calculators.github.io/og/average-order-value-calculator.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@1,400;1,500;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/assets/calc-styles.css?v=8" />
+<link rel="stylesheet" href="/assets/calc-styles.css?v=9" />
 </head>
 <body data-calc="average-order-value-calculator" data-rating="4.7" data-reviews="432" data-ratings-db="">
 <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P52T935Z" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
@@ -77,12 +77,13 @@
       </aside>
     </div>
       <div id="comparePanel">
+        <div class="cmp-head"><span class="tag">Scenario comparison</span></div>
         <div class="cmp">
           <div class="col"><h4>Option A — current selection</h4><div class="cbig num" id="cmpA">$0</div><div class="r-sub" id="cmpAmeta"></div></div>
           <div class="col"><h4 id="cmpBtitle">Option B — snapshot</h4><div class="cbig num" id="cmpB">—</div><div class="r-sub">Set your inputs, then <button type="button" id="snapB" style="border:none;background:none;color:var(--ink);text-decoration:underline;cursor:pointer;padding:0;font:inherit">save as Option B</button> and adjust again.</div></div>
         </div>
       </div>
-    <div class="defbox" style="margin-top:22px"><span class="tag">Your input summary</span><div id="rSummary"></div></div>
+    <div class="summary-box"><span class="tag">Your input summary</span><div id="rSummary" class="sum-grid"></div></div>
   </section>
   <section class="lead" id="detailed">
     <div class="lead-grid" id="leadGrid">
@@ -163,7 +164,7 @@
       <h2 id="factors" class="sr-only">Factors</h2><div class="factors"><div class="factor"><h3>Total revenue</h3><p>Use a representative period to smooth out seasonal spikes.</p></div><div class="factor"><h3>Number of orders</h3><p>Orders, not units, for an accurate per-order average.</p></div><div class="factor"><h3>Target uplift</h3><p>A realistic 5 to 15 percent lift from bundling and upsells is a good start.</p></div><div class="factor"><h3>Product mix</h3><p>Higher-value products and bundles naturally pull AOV up.</p></div></div>
       <div class="keybox"><span class="tag">Key takeaways</span><ul style="margin:0"><li>Free and instant - no sign-up required.</li><li>Built for Shopify and ecommerce stores.</li><li>Use real numbers to plan with confidence.</li><li>Turn the result into action with CartCoders.</li></ul></div>
       <h2 id="related-content">Related calculators</h2><p>Planning a project usually means weighing more than one number. These tools cover the decisions next to this one:</p><ul><li><a href="/free-shipping-threshold-calculator" style="text-decoration:underline">Free Shipping Threshold Calculator</a> — set a profitable threshold</li><li><a href="/customer-lifetime-value-calculator" style="text-decoration:underline">Customer Lifetime Value Calculator</a> — what a customer is worth</li><li><a href="/shopify-profit-margin-calculator" style="text-decoration:underline">Profit Margin Calculator</a> — profit per order</li></ul>
-      <h2 id="faqs">Frequently asked questions</h2><div class="faq"><details><summary>How do I calculate average order value?</summary><p>Divide total revenue by the number of orders for the same period. For example, 60,000 dollars over 1,000 orders is a 60 dollar AOV. This calculator also models the revenue from raising it.</p></details><details><summary>Why does AOV matter so much?</summary><p>Raising AOV adds revenue without extra traffic or acquisition cost, and because fixed per-order costs stay roughly the same, much of the increase becomes profit.</p></details><details><summary>How can I increase AOV?</summary><p>Use product bundles, post-add-to-cart upsells, cross-sells, volume discounts, and a free-shipping threshold set just above your current AOV to nudge larger orders.</p></details></div>
+      <h2 id="faqs">Frequently asked questions</h2><div class="faq"><details open><summary>How do I calculate average order value?</summary><div class="faq-a"><p>Divide total revenue by the number of orders for the same period. For example, 60,000 dollars over 1,000 orders is a 60 dollar AOV. This calculator also models the revenue from raising it.</p></div></details><details open><summary>Why does AOV matter so much?</summary><div class="faq-a"><p>Raising AOV adds revenue without extra traffic or acquisition cost, and because fixed per-order costs stay roughly the same, much of the increase becomes profit.</p></div></details><details open><summary>How can I increase AOV?</summary><div class="faq-a"><p>Use product bundles, post-add-to-cart upsells, cross-sells, volume discounts, and a free-shipping threshold set just above your current AOV to nudge larger orders.</p></div></details></div>
     </article>
   </section>
   <section class="related reveal"><div class="section-head"><h2>Keep planning</h2></div><div class="rel-grid"><a class="rel-card" href="https://cartcoders.com/shopify-conversion-rate-optimization"><span class="k">Service</span><span class="t">Conversion Rate Optimization</span><span class="a">Done-for-you by CartCoders.</span></a><a class="rel-card" href="/free-shipping-threshold-calculator"><span class="k">Calculator</span><span class="t">Free Shipping Threshold</span><span class="a">set a profitable threshold</span></a><a class="rel-card" href="/customer-lifetime-value-calculator"><span class="k">Calculator</span><span class="t">Customer Lifetime Value</span><span class="a">what a customer is worth</span></a><a class="rel-card" href="https://cartcoders.com/blog"><span class="k">Reading</span><span class="t">Shopify Growth Blog</span><span class="a">Guides & benchmarks.</span></a></div></section>
@@ -187,7 +188,7 @@
     shareText:"I used this free average order value calculator to find my AOV and growth upside.",
     configString:"AOV "+CalcKit.fmtMoney(aov)+" | +"+up+"% = "+CalcKit.fmtMoney(extra)};
   };;window.REPORT_META={"calc": "Average Order Value Calculator", "site": "Shopify Cost Calculators", "url": "https://cost-calculators.github.io/average-order-value-calculator"};window.REPORT_PROMO={"kicker": "CartCoders - Certified Shopify Experts", "headline": "Grow revenue from existing traffic.", "sub": "We build bundles, upsells, and cart experiences that lift average order value.", "bullets": ["Bundle & upsell builds", "Cart and checkout UX", "Free-shipping and threshold logic"], "ctaText": "Talk to a Shopify expert", "ctaUrl": "https://cartcoders.com/contact-us"};</script>
-<script src="/assets/calc-app.js?v=8"></script>
+<script src="/assets/calc-app.js?v=9"></script>
 <script>(function(){try{var d=document,de=d.documentElement;if(!('IntersectionObserver'in window))return;de.className+=' reveal-on';var run=function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px',threshold:0.08});d.querySelectorAll('.reveal').forEach(function(x){io.observe(x);});};if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',run);else run();}catch(e){}})();</script>
 </body>
 </html>

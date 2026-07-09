@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Free Shipping Threshold Calculator | Shopify Cost Calculators" /><meta name="twitter:description" content="Find the free shipping threshold that lifts average order value without hurting profit. Enter your AOV, shipping cost, and margin for a suggested threshold." /><meta name="twitter:image" content="https://cost-calculators.github.io/og/free-shipping-threshold-calculator.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@1,400;1,500;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/assets/calc-styles.css?v=8" />
+<link rel="stylesheet" href="/assets/calc-styles.css?v=9" />
 </head>
 <body data-calc="free-shipping-threshold-calculator" data-rating="4.8" data-reviews="760" data-ratings-db="">
 <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P52T935Z" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
@@ -77,12 +77,13 @@
       </aside>
     </div>
       <div id="comparePanel">
+        <div class="cmp-head"><span class="tag">Scenario comparison</span></div>
         <div class="cmp">
           <div class="col"><h4>Option A — current selection</h4><div class="cbig num" id="cmpA">$0</div><div class="r-sub" id="cmpAmeta"></div></div>
           <div class="col"><h4 id="cmpBtitle">Option B — snapshot</h4><div class="cbig num" id="cmpB">—</div><div class="r-sub">Set your inputs, then <button type="button" id="snapB" style="border:none;background:none;color:var(--ink);text-decoration:underline;cursor:pointer;padding:0;font:inherit">save as Option B</button> and adjust again.</div></div>
         </div>
       </div>
-    <div class="defbox" style="margin-top:22px"><span class="tag">Your input summary</span><div id="rSummary"></div></div>
+    <div class="summary-box"><span class="tag">Your input summary</span><div id="rSummary" class="sum-grid"></div></div>
   </section>
   <section class="lead" id="detailed">
     <div class="lead-grid" id="leadGrid">
@@ -163,7 +164,7 @@
       <h2 id="factors" class="sr-only">Factors</h2><div class="factors"><div class="factor"><h3>Average order value</h3><p>Your threshold should sit a little above current AOV to encourage one more item.</p></div><div class="factor"><h3>Shipping cost</h3><p>The cost you absorb determines how much extra margin you need to cover it.</p></div><div class="factor"><h3>Gross margin</h3><p>Higher margins cover shipping with less added order value, lowering the threshold.</p></div><div class="factor"><h3>Cart experience</h3><p>A visible progress bar toward free shipping strongly increases its effect.</p></div></div>
       <div class="keybox"><span class="tag">Key takeaways</span><ul style="margin:0"><li>Free and instant - no sign-up required.</li><li>Built for Shopify and ecommerce stores.</li><li>Use real numbers to plan with confidence.</li><li>Turn the result into action with CartCoders.</li></ul></div>
       <h2 id="related-content">Related calculators</h2><p>Planning a project usually means weighing more than one number. These tools cover the decisions next to this one:</p><ul><li><a href="/average-order-value-calculator" style="text-decoration:underline">Average Order Value Calculator</a> — measure and grow AOV</li><li><a href="/shopify-profit-margin-calculator" style="text-decoration:underline">Profit Margin Calculator</a> — profit per order</li><li><a href="/return-cost-calculator" style="text-decoration:underline">Return Cost Calculator</a> — cost of returns</li></ul>
-      <h2 id="faqs">Frequently asked questions</h2><div class="faq"><details><summary>Where should I set my free shipping threshold?</summary><p>Slightly above your average order value, so most shoppers only need to add one more item to qualify. This calculator suggests a level where the extra margin covers your shipping cost.</p></details><details><summary>Does free shipping actually increase sales?</summary><p>Used well, yes. A threshold raises average order value and reduces cart abandonment, provided it is set so the larger orders still leave you profitable.</p></details><details><summary>Should the threshold cover my full shipping cost?</summary><p>Ideally the added margin from the larger order covers the shipping you absorb. This tool calculates the extra order value needed so the offer stays profit-neutral or better.</p></details></div>
+      <h2 id="faqs">Frequently asked questions</h2><div class="faq"><details open><summary>Where should I set my free shipping threshold?</summary><div class="faq-a"><p>Slightly above your average order value, so most shoppers only need to add one more item to qualify. This calculator suggests a level where the extra margin covers your shipping cost.</p></div></details><details open><summary>Does free shipping actually increase sales?</summary><div class="faq-a"><p>Used well, yes. A threshold raises average order value and reduces cart abandonment, provided it is set so the larger orders still leave you profitable.</p></div></details><details open><summary>Should the threshold cover my full shipping cost?</summary><div class="faq-a"><p>Ideally the added margin from the larger order covers the shipping you absorb. This tool calculates the extra order value needed so the offer stays profit-neutral or better.</p></div></details></div>
     </article>
   </section>
   <section class="related reveal"><div class="section-head"><h2>Keep planning</h2></div><div class="rel-grid"><a class="rel-card" href="https://cartcoders.com/shopify-conversion-rate-optimization"><span class="k">Service</span><span class="t">Conversion & Cart UX</span><span class="a">Done-for-you by CartCoders.</span></a><a class="rel-card" href="/average-order-value-calculator"><span class="k">Calculator</span><span class="t">Average Order Value</span><span class="a">measure and grow AOV</span></a><a class="rel-card" href="/shopify-profit-margin-calculator"><span class="k">Calculator</span><span class="t">Profit Margin</span><span class="a">profit per order</span></a><a class="rel-card" href="https://cartcoders.com/blog"><span class="k">Reading</span><span class="t">Shopify Growth Blog</span><span class="a">Guides & benchmarks.</span></a></div></section>
@@ -187,7 +188,7 @@
     shareText:"I used this free shipping threshold calculator to set a profitable free-shipping minimum.",
     configString:"AOV "+CalcKit.fmtMoney(aov)+" | Threshold "+CalcKit.fmtMoney(thr)};
   };;window.REPORT_META={"calc": "Free Shipping Threshold Calculator", "site": "Shopify Cost Calculators", "url": "https://cost-calculators.github.io/free-shipping-threshold-calculator"};window.REPORT_PROMO={"kicker": "CartCoders - Certified Shopify Experts", "headline": "Make free shipping pay for itself.", "sub": "We build free-shipping bars, cart upsells, and thresholds that lift AOV without hurting margin.", "bullets": ["Free-shipping progress bars", "Cart upsells & bundles", "Checkout UX improvements"], "ctaText": "Talk to a Shopify expert", "ctaUrl": "https://cartcoders.com/contact-us"};</script>
-<script src="/assets/calc-app.js?v=8"></script>
+<script src="/assets/calc-app.js?v=9"></script>
 <script>(function(){try{var d=document,de=d.documentElement;if(!('IntersectionObserver'in window))return;de.className+=' reveal-on';var run=function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px',threshold:0.08});d.querySelectorAll('.reveal').forEach(function(x){io.observe(x);});};if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',run);else run();}catch(e){}})();</script>
 </body>
 </html>

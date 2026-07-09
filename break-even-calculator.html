@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Break-Even Point Calculator | Shopify Cost Calculators" /><meta name="twitter:description" content="Find how many units and how much revenue you need to break even. Enter fixed costs, price, and variable cost per unit for an instant break-even point." /><meta name="twitter:image" content="https://cost-calculators.github.io/og/break-even-calculator.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@1,400;1,500;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/assets/calc-styles.css?v=8" />
+<link rel="stylesheet" href="/assets/calc-styles.css?v=9" />
 </head>
 <body data-calc="break-even-calculator" data-rating="4.9" data-reviews="781" data-ratings-db="">
 <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P52T935Z" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
@@ -77,12 +77,13 @@
       </aside>
     </div>
       <div id="comparePanel">
+        <div class="cmp-head"><span class="tag">Scenario comparison</span></div>
         <div class="cmp">
           <div class="col"><h4>Option A — current selection</h4><div class="cbig num" id="cmpA">$0</div><div class="r-sub" id="cmpAmeta"></div></div>
           <div class="col"><h4 id="cmpBtitle">Option B — snapshot</h4><div class="cbig num" id="cmpB">—</div><div class="r-sub">Set your inputs, then <button type="button" id="snapB" style="border:none;background:none;color:var(--ink);text-decoration:underline;cursor:pointer;padding:0;font:inherit">save as Option B</button> and adjust again.</div></div>
         </div>
       </div>
-    <div class="defbox" style="margin-top:22px"><span class="tag">Your input summary</span><div id="rSummary"></div></div>
+    <div class="summary-box"><span class="tag">Your input summary</span><div id="rSummary" class="sum-grid"></div></div>
   </section>
   <section class="lead" id="detailed">
     <div class="lead-grid" id="leadGrid">
@@ -163,7 +164,7 @@
       <h2 id="factors" class="sr-only">Factors</h2><div class="factors"><div class="factor"><h3>Fixed costs</h3><p>Rent, software, salaries and other costs that do not change with volume.</p></div><div class="factor"><h3>Selling price</h3><p>A higher price widens your contribution margin and lowers break-even.</p></div><div class="factor"><h3>Variable cost per unit</h3><p>Product, shipping and fees per order directly raise your break-even.</p></div><div class="factor"><h3>Contribution margin</h3><p>Price minus variable cost - the engine that pays down fixed costs.</p></div></div>
       <div class="keybox"><span class="tag">Key takeaways</span><ul style="margin:0"><li>Free and instant - no sign-up required.</li><li>Built for Shopify and ecommerce stores.</li><li>Use real numbers to plan with confidence.</li><li>Turn the result into action with CartCoders.</li></ul></div>
       <h2 id="related-content">Related calculators</h2><p>Planning a project usually means weighing more than one number. These tools cover the decisions next to this one:</p><ul><li><a href="/shopify-profit-margin-calculator" style="text-decoration:underline">Profit Margin Calculator</a> — profit per order</li><li><a href="/average-order-value-calculator" style="text-decoration:underline">Average Order Value Calculator</a> — grow order value</li><li><a href="/customer-acquisition-cost-calculator" style="text-decoration:underline">CAC & Payback Calculator</a> — acquisition economics</li></ul>
-      <h2 id="faqs">Frequently asked questions</h2><div class="faq"><details><summary>How do I calculate the break-even point?</summary><p>Divide your fixed costs by your contribution margin per unit (selling price minus variable cost per unit). The result is the number of units you must sell to cover all costs. This calculator does it instantly.</p></details><details><summary>What is contribution margin?</summary><p>It is the money left from each sale after variable costs, available to cover fixed costs and then profit. A higher contribution margin means a lower break-even point.</p></details><details><summary>How can I lower my break-even point?</summary><p>Raise your price, reduce variable cost per unit, or cut fixed overhead. Small improvements to margin reduce break-even volume quickly.</p></details></div>
+      <h2 id="faqs">Frequently asked questions</h2><div class="faq"><details open><summary>How do I calculate the break-even point?</summary><div class="faq-a"><p>Divide your fixed costs by your contribution margin per unit (selling price minus variable cost per unit). The result is the number of units you must sell to cover all costs. This calculator does it instantly.</p></div></details><details open><summary>What is contribution margin?</summary><div class="faq-a"><p>It is the money left from each sale after variable costs, available to cover fixed costs and then profit. A higher contribution margin means a lower break-even point.</p></div></details><details open><summary>How can I lower my break-even point?</summary><div class="faq-a"><p>Raise your price, reduce variable cost per unit, or cut fixed overhead. Small improvements to margin reduce break-even volume quickly.</p></div></details></div>
     </article>
   </section>
   <section class="related reveal"><div class="section-head"><h2>Keep planning</h2></div><div class="rel-grid"><a class="rel-card" href="https://cartcoders.com/shopify-conversion-rate-optimization"><span class="k">Service</span><span class="t">Conversion Rate Optimization</span><span class="a">Done-for-you by CartCoders.</span></a><a class="rel-card" href="/shopify-profit-margin-calculator"><span class="k">Calculator</span><span class="t">Profit Margin</span><span class="a">profit per order</span></a><a class="rel-card" href="/average-order-value-calculator"><span class="k">Calculator</span><span class="t">Average Order Value</span><span class="a">grow order value</span></a><a class="rel-card" href="https://cartcoders.com/blog"><span class="k">Reading</span><span class="t">Shopify Growth Blog</span><span class="a">Guides & benchmarks.</span></a></div></section>
@@ -187,7 +188,7 @@
     shareText:"I used this free break-even calculator to see how many sales I need to profit.",
     configString:"Fixed "+CalcKit.fmtMoney(fixed)+" | CM "+CalcKit.fmtMoney(cm)+" | BE "+CalcKit.fmtNum(units)+" units"};
   };;window.REPORT_META={"calc": "Break-Even Point Calculator", "site": "Shopify Cost Calculators", "url": "https://cost-calculators.github.io/break-even-calculator"};window.REPORT_PROMO={"kicker": "CartCoders - Certified Shopify Experts", "headline": "Hit profit faster.", "sub": "We help stores lift conversion and margin so they cross break-even sooner and scale safely.", "bullets": ["Conversion rate optimisation", "Merchandising and pricing UX", "Performance improvements"], "ctaText": "Talk to a Shopify expert", "ctaUrl": "https://cartcoders.com/contact-us"};</script>
-<script src="/assets/calc-app.js?v=8"></script>
+<script src="/assets/calc-app.js?v=9"></script>
 <script>(function(){try{var d=document,de=d.documentElement;if(!('IntersectionObserver'in window))return;de.className+=' reveal-on';var run=function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px',threshold:0.08});d.querySelectorAll('.reveal').forEach(function(x){io.observe(x);});};if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',run);else run();}catch(e){}})();</script>
 </body>
 </html>

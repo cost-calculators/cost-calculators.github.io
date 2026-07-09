@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Customer Lifetime Value Calculator | Shopify Cost Calculators" /><meta name="twitter:description" content="Calculate customer lifetime value (LTV) and the most you can spend to acquire a customer. Enter AOV, purchase frequency, lifespan, and margin." /><meta name="twitter:image" content="https://cost-calculators.github.io/og/customer-lifetime-value-calculator.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@1,400;1,500;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/assets/calc-styles.css?v=8" />
+<link rel="stylesheet" href="/assets/calc-styles.css?v=9" />
 </head>
 <body data-calc="customer-lifetime-value-calculator" data-rating="5.0" data-reviews="713" data-ratings-db="">
 <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P52T935Z" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
@@ -77,12 +77,13 @@
       </aside>
     </div>
       <div id="comparePanel">
+        <div class="cmp-head"><span class="tag">Scenario comparison</span></div>
         <div class="cmp">
           <div class="col"><h4>Option A — current selection</h4><div class="cbig num" id="cmpA">$0</div><div class="r-sub" id="cmpAmeta"></div></div>
           <div class="col"><h4 id="cmpBtitle">Option B — snapshot</h4><div class="cbig num" id="cmpB">—</div><div class="r-sub">Set your inputs, then <button type="button" id="snapB" style="border:none;background:none;color:var(--ink);text-decoration:underline;cursor:pointer;padding:0;font:inherit">save as Option B</button> and adjust again.</div></div>
         </div>
       </div>
-    <div class="defbox" style="margin-top:22px"><span class="tag">Your input summary</span><div id="rSummary"></div></div>
+    <div class="summary-box"><span class="tag">Your input summary</span><div id="rSummary" class="sum-grid"></div></div>
   </section>
   <section class="lead" id="detailed">
     <div class="lead-grid" id="leadGrid">
@@ -163,7 +164,7 @@
       <h2 id="factors" class="sr-only">Factors</h2><div class="factors"><div class="factor"><h3>Average order value</h3><p>Higher AOV lifts every future order's contribution to lifetime value.</p></div><div class="factor"><h3>Purchase frequency</h3><p>How often customers reorder is the strongest lever on LTV.</p></div><div class="factor"><h3>Customer lifespan</h3><p>The longer customers stay, the more lifetime value compounds.</p></div><div class="factor"><h3>Gross margin</h3><p>Profit LTV, not revenue LTV, is what you compare against acquisition cost.</p></div></div>
       <div class="keybox"><span class="tag">Key takeaways</span><ul style="margin:0"><li>Free and instant - no sign-up required.</li><li>Built for Shopify and ecommerce stores.</li><li>Use real numbers to plan with confidence.</li><li>Turn the result into action with CartCoders.</li></ul></div>
       <h2 id="related-content">Related calculators</h2><p>Planning a project usually means weighing more than one number. These tools cover the decisions next to this one:</p><ul><li><a href="/customer-acquisition-cost-calculator" style="text-decoration:underline">CAC & Payback Calculator</a> — cost to acquire a customer</li><li><a href="/mrr-churn-calculator" style="text-decoration:underline">MRR & Churn Calculator</a> — subscription revenue</li><li><a href="/average-order-value-calculator" style="text-decoration:underline">Average Order Value Calculator</a> — grow AOV</li></ul>
-      <h2 id="faqs">Frequently asked questions</h2><div class="faq"><details><summary>How is customer lifetime value calculated?</summary><p>Multiply average order value by purchase frequency and customer lifespan for revenue LTV, then multiply by gross margin for profit LTV. This calculator does both and suggests a healthy maximum acquisition cost.</p></details><details><summary>What is a good LTV:CAC ratio?</summary><p>Around 3:1 is the widely used benchmark, three dollars of lifetime profit for every dollar of acquisition cost. Below 2:1 is usually unsustainable; far above 5:1 can mean you are under-investing in growth.</p></details><details><summary>How do I increase LTV?</summary><p>Improve retention with great post-purchase experience, email and SMS flows, loyalty programs, and subscriptions. Raising repeat purchase rate moves LTV more than chasing new traffic.</p></details></div>
+      <h2 id="faqs">Frequently asked questions</h2><div class="faq"><details open><summary>How is customer lifetime value calculated?</summary><div class="faq-a"><p>Multiply average order value by purchase frequency and customer lifespan for revenue LTV, then multiply by gross margin for profit LTV. This calculator does both and suggests a healthy maximum acquisition cost.</p></div></details><details open><summary>What is a good LTV:CAC ratio?</summary><div class="faq-a"><p>Around 3:1 is the widely used benchmark, three dollars of lifetime profit for every dollar of acquisition cost. Below 2:1 is usually unsustainable; far above 5:1 can mean you are under-investing in growth.</p></div></details><details open><summary>How do I increase LTV?</summary><div class="faq-a"><p>Improve retention with great post-purchase experience, email and SMS flows, loyalty programs, and subscriptions. Raising repeat purchase rate moves LTV more than chasing new traffic.</p></div></details></div>
     </article>
   </section>
   <section class="related reveal"><div class="section-head"><h2>Keep planning</h2></div><div class="rel-grid"><a class="rel-card" href="https://cartcoders.com/shopify-app-development"><span class="k">Service</span><span class="t">Shopify Subscription & Retention</span><span class="a">Done-for-you by CartCoders.</span></a><a class="rel-card" href="/customer-acquisition-cost-calculator"><span class="k">Calculator</span><span class="t">CAC & Payback</span><span class="a">cost to acquire a customer</span></a><a class="rel-card" href="/mrr-churn-calculator"><span class="k">Calculator</span><span class="t">MRR & Churn</span><span class="a">subscription revenue</span></a><a class="rel-card" href="https://cartcoders.com/blog"><span class="k">Reading</span><span class="t">Shopify Growth Blog</span><span class="a">Guides & benchmarks.</span></a></div></section>
@@ -187,7 +188,7 @@
     shareText:"I used this free customer lifetime value calculator to see what each customer is worth.",
     configString:"AOV "+CalcKit.fmtMoney(aov)+" | LTV "+CalcKit.fmtMoney(profit)};
   };;window.REPORT_META={"calc": "Customer Lifetime Value Calculator", "site": "Shopify Cost Calculators", "url": "https://cost-calculators.github.io/customer-lifetime-value-calculator"};window.REPORT_PROMO={"kicker": "CartCoders - Certified Shopify Experts", "headline": "Make every customer worth more.", "sub": "We build retention, loyalty, and subscription experiences that compound lifetime value.", "bullets": ["Subscription & loyalty builds", "Retention email/SMS flows", "Post-purchase experience"], "ctaText": "Talk to a Shopify expert", "ctaUrl": "https://cartcoders.com/contact-us"};</script>
-<script src="/assets/calc-app.js?v=8"></script>
+<script src="/assets/calc-app.js?v=9"></script>
 <script>(function(){try{var d=document,de=d.documentElement;if(!('IntersectionObserver'in window))return;de.className+=' reveal-on';var run=function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px',threshold:0.08});d.querySelectorAll('.reveal').forEach(function(x){io.observe(x);});};if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',run);else run();}catch(e){}})();</script>
 </body>
 </html>

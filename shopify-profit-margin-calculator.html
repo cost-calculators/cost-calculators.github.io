@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Shopify Profit Margin Calculator | Shopify Cost Calculators" /><meta name="twitter:description" content="Calculate your true profit margin after product cost, Shopify fees, shipping, and ads. See net profit per order, margin %, and markup instantly." /><meta name="twitter:image" content="https://cost-calculators.github.io/og/shopify-profit-margin-calculator.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@1,400;1,500;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/assets/calc-styles.css?v=8" />
+<link rel="stylesheet" href="/assets/calc-styles.css?v=9" />
 </head>
 <body data-calc="shopify-profit-margin-calculator" data-rating="4.9" data-reviews="746" data-ratings-db="">
 <!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P52T935Z" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
@@ -77,12 +77,13 @@
       </aside>
     </div>
       <div id="comparePanel">
+        <div class="cmp-head"><span class="tag">Scenario comparison</span></div>
         <div class="cmp">
           <div class="col"><h4>Option A — current selection</h4><div class="cbig num" id="cmpA">$0</div><div class="r-sub" id="cmpAmeta"></div></div>
           <div class="col"><h4 id="cmpBtitle">Option B — snapshot</h4><div class="cbig num" id="cmpB">—</div><div class="r-sub">Set your inputs, then <button type="button" id="snapB" style="border:none;background:none;color:var(--ink);text-decoration:underline;cursor:pointer;padding:0;font:inherit">save as Option B</button> and adjust again.</div></div>
         </div>
       </div>
-    <div class="defbox" style="margin-top:22px"><span class="tag">Your input summary</span><div id="rSummary"></div></div>
+    <div class="summary-box"><span class="tag">Your input summary</span><div id="rSummary" class="sum-grid"></div></div>
   </section>
   <section class="lead" id="detailed">
     <div class="lead-grid" id="leadGrid">
@@ -163,7 +164,7 @@
       <h2 id="factors" class="sr-only">Factors</h2><div class="factors"><div class="factor"><h3>Product cost (COGS)</h3><p>Your landed cost per unit is usually the biggest single input.</p></div><div class="factor"><h3>Payment fees</h3><p>Processing plus the fixed fee quietly reduces every order's margin.</p></div><div class="factor"><h3>Shipping</h3><p>Shipping you absorb is one of the most common hidden margin killers.</p></div><div class="factor"><h3>Marketing per order</h3><p>Ad spend per order turns a healthy gross margin into a thin net one.</p></div></div>
       <div class="keybox"><span class="tag">Key takeaways</span><ul style="margin:0"><li>Free and instant - no sign-up required.</li><li>Built for Shopify and ecommerce stores.</li><li>Use real numbers to plan with confidence.</li><li>Turn the result into action with CartCoders.</li></ul></div>
       <h2 id="related-content">Related calculators</h2><p>Planning a project usually means weighing more than one number. These tools cover the decisions next to this one:</p><ul><li><a href="/shopify-transaction-fee-calculator" style="text-decoration:underline">Shopify Transaction Fee Calculator</a> — see what Shopify takes</li><li><a href="/break-even-calculator" style="text-decoration:underline">Break-Even Point Calculator</a> — units to break even</li><li><a href="/discount-profit-impact-calculator" style="text-decoration:underline">Discount Impact Calculator</a> — price promos safely</li></ul>
-      <h2 id="faqs">Frequently asked questions</h2><div class="faq"><details><summary>What is a good profit margin for a Shopify store?</summary><p>Most successful stores run a net margin of roughly 10 to 20 percent after all costs. Above 20 percent is strong; below 10 percent is risky because there is little room for ad spend or surprises.</p></details><details><summary>What is the difference between margin and markup?</summary><p>Margin is profit as a percentage of the selling price; markup is profit as a percentage of cost. A 60 percent margin equals a 150 percent markup. This tool shows both.</p></details><details><summary>Does this include Shopify fees?</summary><p>Yes. Enter your payment fee percentage and the tool includes processing plus the fixed per-order fee in your net profit.</p></details></div>
+      <h2 id="faqs">Frequently asked questions</h2><div class="faq"><details open><summary>What is a good profit margin for a Shopify store?</summary><div class="faq-a"><p>Most successful stores run a net margin of roughly 10 to 20 percent after all costs. Above 20 percent is strong; below 10 percent is risky because there is little room for ad spend or surprises.</p></div></details><details open><summary>What is the difference between margin and markup?</summary><div class="faq-a"><p>Margin is profit as a percentage of the selling price; markup is profit as a percentage of cost. A 60 percent margin equals a 150 percent markup. This tool shows both.</p></div></details><details open><summary>Does this include Shopify fees?</summary><div class="faq-a"><p>Yes. Enter your payment fee percentage and the tool includes processing plus the fixed per-order fee in your net profit.</p></div></details></div>
     </article>
   </section>
   <section class="related reveal"><div class="section-head"><h2>Keep planning</h2></div><div class="rel-grid"><a class="rel-card" href="https://cartcoders.com/shopify-conversion-rate-optimization"><span class="k">Service</span><span class="t">Conversion Rate Optimization</span><span class="a">Done-for-you by CartCoders.</span></a><a class="rel-card" href="/shopify-transaction-fee-calculator"><span class="k">Calculator</span><span class="t">Shopify Transaction Fee</span><span class="a">see what Shopify takes</span></a><a class="rel-card" href="/break-even-calculator"><span class="k">Calculator</span><span class="t">Break-Even Point</span><span class="a">units to break even</span></a><a class="rel-card" href="https://cartcoders.com/blog"><span class="k">Reading</span><span class="t">Shopify Growth Blog</span><span class="a">Guides & benchmarks.</span></a></div></section>
@@ -188,7 +189,7 @@
     shareText:"I used this free Shopify profit margin calculator to find my true profit per order.",
     configString:"Price "+CalcKit.fmtMoney(price)+" | Net "+CalcKit.fmtMoney(profit)+" | Margin "+margin.toFixed(1)+"%"};
   };;window.REPORT_META={"calc": "Shopify Profit Margin Calculator", "site": "Shopify Cost Calculators", "url": "https://cost-calculators.github.io/shopify-profit-margin-calculator"};window.REPORT_PROMO={"kicker": "CartCoders - Certified Shopify Experts", "headline": "Turn thin margins into healthy ones.", "sub": "We grow profit per order through conversion, AOV, and pricing work, not by cutting corners.", "bullets": ["Conversion rate optimisation", "AOV and bundling strategy", "Performance and UX improvements"], "ctaText": "Get a free store review", "ctaUrl": "https://cartcoders.com/free-audit"};</script>
-<script src="/assets/calc-app.js?v=8"></script>
+<script src="/assets/calc-app.js?v=9"></script>
 <script>(function(){try{var d=document,de=d.documentElement;if(!('IntersectionObserver'in window))return;de.className+=' reveal-on';var run=function(){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px',threshold:0.08});d.querySelectorAll('.reveal').forEach(function(x){io.observe(x);});};if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',run);else run();}catch(e){}})();</script>
 </body>
 </html>

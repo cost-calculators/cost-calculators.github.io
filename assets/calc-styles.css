@@ -439,3 +439,84 @@ html.reveal-on .reveal.in{opacity:1;transform:none}
 .stickynote{display:inline-block;border:2px solid var(--nb-ink);background:#fff;border-radius:8px;
   padding:5px 12px;font-family:'Newsreader',serif;font-style:italic;font-size:12px;
   box-shadow:2px 2px 0 var(--nb-sh)}
+
+/* ============================================================================
+   CALCULATOR-PAGE POLISH  ·  targeted fixes (overrides skin via cascade order)
+   ============================================================================ */
+
+/* (1) eyebrow badge: tilted by default, straightens on hover */
+.eyebrow{transition:transform .18s ease,box-shadow .18s ease}
+.eyebrow:hover{transform:rotate(0);box-shadow:4px 4px 0 var(--nb-sh)}
+
+/* (3) Key takeaways: tilted card that squares up on hover */
+.keybox{transform:rotate(-1.4deg);transition:transform .2s ease,box-shadow .2s ease;max-width:none}
+.keybox:hover{transform:rotate(0);box-shadow:6px 8px 0 var(--nb-sh)}
+.keybox ul{margin:0;padding:0;list-style:none}
+.keybox li{position:relative;padding:8px 0 8px 26px;font-size:14.5px;line-height:1.5}
+.keybox li::before{content:"";position:absolute;left:2px;top:13px;width:9px;height:9px;
+  background:var(--nb-ink);border-radius:2px;transform:rotate(45deg)}
+
+/* (5) Keep planning cards: tilted, square on hover (alternating tilt) */
+.rel-card{transform:rotate(-1.2deg);transition:transform .18s ease,box-shadow .18s ease}
+.rel-card:nth-child(2n){transform:rotate(1.3deg)}
+.rel-card:nth-child(3n){transform:rotate(-.6deg)}
+.rel-card:hover{transform:rotate(0) !important;box-shadow:7px 9px 0 var(--nb-sh)}
+
+/* (4) FAQ: open cards, spacing, clear +/- toggle */
+.faq{border-top:none;margin-top:18px;display:flex;flex-direction:column;gap:14px;max-width:840px}
+.faq details{border:2px solid var(--nb-ink);border-radius:14px;box-shadow:3px 4px 0 var(--nb-sh);
+  background:#fff;overflow:hidden;transition:box-shadow .18s ease,transform .18s ease}
+.faq details[open]{box-shadow:5px 6px 0 var(--nb-sh)}
+.faq details:hover{transform:translate(-1px,-1px)}
+.faq summary{cursor:pointer;list-style:none;padding:16px 54px 16px 20px;font-family:var(--display);
+  font-weight:700;font-size:15.5px;line-height:1.4;position:relative;background:#fff;color:var(--nb-ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:16px;top:50%;width:24px;height:24px;
+  border:2px solid var(--nb-ink);border-radius:7px;transform:translateY(-50%);background:#fff;
+  box-shadow:2px 2px 0 var(--nb-sh)}
+.faq summary::before{content:"";position:absolute;right:16px;top:50%;width:24px;height:24px;z-index:1;
+  transform:translateY(-50%);
+  background:linear-gradient(var(--nb-ink),var(--nb-ink)) center/11px 2.6px no-repeat,
+             linear-gradient(var(--nb-ink),var(--nb-ink)) center/2.6px 11px no-repeat}
+.faq details[open] summary::before{background:linear-gradient(var(--nb-ink),var(--nb-ink)) center/11px 2.6px no-repeat}
+.faq details[open] summary{border-bottom:2px solid var(--nb-ink)}
+.faq .faq-a{padding:15px 20px 17px;background:#fcfcfb}
+.faq .faq-a p{margin:0;color:#2a2a2a;font-size:14.5px;line-height:1.65;max-width:none}
+
+/* (2 & 7) Your input summary: attractive full-width grid card */
+.summary-box{border:2px solid var(--nb-ink);border-radius:16px;box-shadow:5px 6px 0 var(--nb-sh);
+  background:#fff;padding:18px 22px 12px;margin-top:22px}
+.summary-box>.tag{font-family:var(--display);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-2);display:block;margin-bottom:8px}
+.sum-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0 30px}
+.sum-grid .r-line{border-top:1px dashed #dcdcd7}
+.sum-grid .r-line .k{color:var(--ink-2)}
+.sum-grid .r-line .v{font-family:var(--display);font-weight:700}
+
+/* (6) Compare toggle row + scenario cards */
+.compare-row{margin-top:16px;border:2px solid var(--nb-ink);border-radius:12px;box-shadow:3px 3px 0 var(--nb-sh);
+  padding:12px 14px;display:flex;align-items:center;gap:12px;background:#fff}
+#comparePanel{display:none;border:none;background:transparent;padding:0;border-radius:0}
+#comparePanel.on{display:block;margin-top:22px}
+.cmp-head{margin-bottom:12px}
+.cmp{max-width:840px;grid-template-columns:1fr 1fr;gap:16px}
+.cmp .col{border:2px solid var(--nb-ink) !important;border-radius:16px;box-shadow:5px 6px 0 var(--nb-sh);
+  background:#fff;padding:20px}
+.cmp .col:nth-child(2){background:var(--nb-g1)}
+.cmp .col h4{font-family:var(--display);font-weight:700;font-size:14px;margin:0 0 8px}
+.cmp .col .cbig{font-size:26px}
+
+/* (8) attractive select dropdowns — black arrow tab */
+.select-wrap{position:relative}
+.select-wrap select{padding-right:52px !important}
+.select-wrap::after{content:"";position:absolute;right:0;top:0;bottom:0;width:40px;background:var(--nb-ink);
+  border-top-right-radius:8px;border-bottom-right-radius:8px;pointer-events:none;
+  transform:none;border-left:2px solid var(--nb-ink)}
+.select-wrap::before{content:"";position:absolute;right:14px;top:50%;width:9px;height:9px;z-index:2;
+  border-right:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:translateY(-70%) rotate(45deg);pointer-events:none}
+select{cursor:pointer;transition:box-shadow .12s ease}
+select:hover{box-shadow:3px 4px 0 var(--nb-sh)}
+select:focus{box-shadow:3px 4px 0 var(--nb-sh)}
+.numwrap:focus-within,.field input:focus{box-shadow:3px 4px 0 var(--nb-sh)}
+.faq summary::after{content:"" !important}
+.faq details[open] summary::after{content:"" !important}
